@@ -11,6 +11,7 @@
       "persistent": true
     },
     "lint": {
+      "cache": true,
       "dependsOn": ["^lint"]
     },
     "start": {
@@ -19,6 +20,7 @@
       "persistent": false
     },
     "typecheck": {
+      "cache": true,
       "dependsOn": ["^typecheck"]
     }
   },
