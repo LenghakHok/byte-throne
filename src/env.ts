@@ -25,9 +25,6 @@ export interface IEnvClient {
   DISCORD_CLIENT_SECRET: undefined;
 
   RESEND_API_KEY: undefined;
-
-  TWITTER_CLIENT_ID: undefined;
-  TWITTER_CLIENT_SECRET: undefined;
 }
 
 export interface IEnvSever {
@@ -55,9 +52,6 @@ export interface IEnvSever {
   DISCORD_CLIENT_SECRET: string;
 
   RESEND_API_KEY: string;
-
-  TWITTER_CLIENT_ID: string;
-  TWITTER_CLIENT_SECRET: string;
 }
 
 export const assertEnv = createAssert<IEnvSever | IEnvClient>();

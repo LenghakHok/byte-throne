@@ -91,7 +91,7 @@
     "turbo": "^2.5.1",
     "typescript": "~5.8.3"
   },
-  "name": "@bling-io/bytethrone",
+  "name": "@bling-io/byte-throne",
   "packageManager": "bun@1.2.10",
   "scripts": {
     "astro": "astro",
