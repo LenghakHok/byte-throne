@@ -60,6 +60,7 @@
     "enabled": true,
     "ignore": [
       ".idea",
+      ".prettierrc",
       ".astro",
       ".vercel",
       ".turbo",
@@ -143,6 +144,7 @@
     {
       "ignore": [
         ".idea",
+        ".prettierrc",
         ".astro",
         ".million",
         ".vercel",
@@ -150,7 +152,19 @@
         "build",
         "dist",
         "node_modules"
-      ]
+      ],
+      "include": ["*.astro"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedImports": "off"
+          },
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          }
+        }
+      }
     }
   ]
 }
