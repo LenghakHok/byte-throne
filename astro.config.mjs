@@ -27,7 +27,11 @@ export default defineConfig({
   output: "server",
   adapter:
     process.env.NODE_ENV === "production"
-      ? vercel()
+      ? vercel({
+          imageService: true,
+          devImageService: "sharp",
+          skewProtection: true,
+        })
       : node({
           mode: "standalone",
         }),
