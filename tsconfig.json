@@ -5,9 +5,21 @@
     "jsxImportSource": "react",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "plugins": [
+      {
+        "transform": "typia/lib/transform"
+      }
+    ],
+    "strict": true,
+    "strictNullChecks": true
   },
   "exclude": ["dist"],
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"]
+  "include": [".astro/types.d.ts", "**/*"],
+  "plugins": [
+    {
+      "transform": "typia/lib/transform"
+    }
+  ]
 }

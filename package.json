@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "@astrojs/node": "^9.2.1",
     "@astrojs/react": "^4.2.5",
+    "@astrojs/vercel": "^8.1.4",
     "@dotenvx/dotenvx": "^1.41.0",
     "@hookform/resolvers": "^5.0.1",
     "@legendapp/state": "3.0.0-beta.30",
@@ -40,8 +42,10 @@
     "cmdk": "^1.1.1",
     "cobe": "^0.6.3",
     "date-fns": "^4.1.0",
-    "drizzle-orm": "^0.42.0",
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.43.0",
     "embla-carousel-react": "^8.6.0",
+    "hono": "^4.7.7",
     "input-otp": "^1.4.2",
     "isbot": "^5.1.26",
     "lucide-react": "^0.503.0",
@@ -87,7 +91,7 @@
     "turbo": "^2.5.1",
     "typescript": "~5.8.3"
   },
-  "name": "@bling-io/byte-throne",
+  "name": "@bling-io/bytethrone",
   "packageManager": "bun@1.2.10",
   "scripts": {
     "astro": "astro",
@@ -95,6 +99,7 @@
     "dev": "astro dev",
     "lint": "biome check --fix --unsafe --no-errors-on-unmatched ./src",
     "postinstall": "husky",
+    "prepare": "ts-patch install",
     "preview": "astro preview",
     "typecheck": "tsc --noEmit"
   },
