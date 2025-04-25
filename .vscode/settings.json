@@ -1,0 +1,22 @@
+{
+  "[astro]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ts": "always"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "always",
+    "source.organizeLinkDefinitions": "always",
+    "source.sortImports": "always"
+  },
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.dbclient-js": "javascript",
+    "*.ndjson": "jsonl",
+    "*.sqlbook": "sql"
+  }
+}
