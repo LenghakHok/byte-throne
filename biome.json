@@ -1,0 +1,156 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "assists": {
+    "actions": {
+      "source": {
+        "sortJsxProps": "on",
+        "useSortedKeys": "on"
+      }
+    },
+    "enabled": true,
+    "ignore": [
+      ".idea",
+      ".astro",
+      ".vercel",
+      ".turbo",
+      "build",
+      "dist",
+      "node_modules"
+    ]
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    }
+  },
+  "formatter": {
+    "attributePosition": "multiline",
+    "bracketSpacing": true,
+    "enabled": true,
+    "formatWithErrors": true,
+    "ignore": [
+      ".idea",
+      ".astro",
+      ".vercel",
+      ".turbo",
+      "build",
+      "dist",
+      "node_modules"
+    ],
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80
+  },
+  "javascript": {
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "double",
+      "semicolons": "always"
+    },
+    "jsxRuntime": "reactClassic",
+    "linter": {
+      "enabled": true
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "ignore": [
+      ".idea",
+      ".astro",
+      ".vercel",
+      ".turbo",
+      "build",
+      "dist",
+      "node_modules"
+    ],
+    "rules": {
+      "a11y": {
+        "all": true
+      },
+      "all": true,
+      "complexity": {
+        "all": true
+      },
+      "correctness": {
+        "all": true,
+        "noNodejsModules": "off",
+        "noUndeclaredDependencies": "off",
+        "useImportExtensions": "off"
+      },
+      "nursery": {
+        "all": true,
+        "noProcessEnv": "off",
+        "noSecrets": "off",
+        "useComponentExportOnlyModules": "off",
+        "useConsistentCurlyBraces": {
+          "fix": "safe",
+          "level": "error"
+        },
+        "useExplicitType": "off",
+        "useImportRestrictions": "off",
+        "useSortedClasses": {
+          "fix": "safe",
+          "level": "error",
+          "options": {
+            "attributes": ["className"],
+            "functions": ["cn", "cva"]
+          }
+        }
+      },
+      "performance": {
+        "all": true,
+        "noBarrelFile": "off"
+      },
+      "security": {
+        "all": true
+      },
+      "style": {
+        "all": true,
+        "noDefaultExport": "off",
+        "noNamespaceImport": "off",
+        "noParameterAssign": "warn",
+        "noParameterProperties": "off",
+        "useExplicitLengthCheck": "off",
+        "useFilenamingConvention": "off",
+        "useNamingConvention": "off"
+      },
+      "suspicious": {
+        "all": true,
+        "noConsole": "off",
+        "noConsoleLog": "off",
+        "noExplicitAny": "off",
+        "noReactSpecificProps": "off"
+      }
+    }
+  },
+  "organizeImports": {
+    "enabled": false,
+    "ignore": [
+      ".idea",
+      ".astro",
+      ".vercel",
+      ".turbo",
+      "build",
+      "dist",
+      "node_modules"
+    ]
+  },
+  "overrides": [
+    {
+      "ignore": [
+        ".idea",
+        ".astro",
+        ".million",
+        ".vercel",
+        ".turbo",
+        "build",
+        "dist",
+        "node_modules"
+      ]
+    }
+  ]
+}
