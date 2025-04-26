@@ -38,12 +38,12 @@ export default defineConfig({
 
   env: {
     schema: {
-      VITE_APP_NAME: envField.string({
+      PUBLIC_APP_NAME: envField.string({
         access: "public",
         context: "client",
       }),
 
-      VITE_APP_URL: envField.string({
+      PUBLIC_APP_URL: envField.string({
         access: "public",
         context: "client",
         url: true,
