@@ -1,17 +1,8 @@
 ---
 import { ThemesToggle } from "@/components/core/themes-toggle";
-import "@/styles/globals.css";
+import Root from "@/components/layouts/root.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <ThemesToggle client:load />
-  </body>
-</html>
+<Root>
+  <ThemesToggle client:load />
+</Root>

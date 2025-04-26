@@ -2,11 +2,11 @@
   "dialect": "postgresql",
   "entries": [
     {
+      "breakpoints": true,
       "idx": 0,
-      "version": "7",
-      "when": 1745643753627,
       "tag": "0000_demonic_the_renegades",
-      "breakpoints": true
+      "version": "7",
+      "when": 1745643753627
     }
   ],
   "version": "7"
