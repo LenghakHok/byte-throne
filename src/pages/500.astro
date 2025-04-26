@@ -1,0 +1,13 @@
+---
+import Root from "@/components/layouts/root.astro";
+
+interface Props {
+  error: unknown;
+}
+
+const { error } = Astro.props;
+---
+
+<Root>
+  {error instanceof Error ? error.message : "Internal Server Error"}
+</Root>

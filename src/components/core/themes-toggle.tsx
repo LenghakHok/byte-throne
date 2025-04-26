@@ -5,28 +5,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useThemes } from "@/hooks/use-themes";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
-import React from "react";
 
 export function ThemesToggle(props: ComponentPropsWithRef<typeof Button>) {
-  const [theme, setThemeState] = React.useState<
-    "theme-light" | "dark" | "system"
-  >("theme-light");
-
-  React.useEffect(() => {
-    const isDarkMode = document.documentElement.classList.contains("dark");
-    setThemeState(isDarkMode ? "dark" : "theme-light");
-  }, []);
-
-  React.useEffect(() => {
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-  }, [theme]);
-
+  const { setThemeState } = useThemes();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild={true}>

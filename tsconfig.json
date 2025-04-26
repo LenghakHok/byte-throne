@@ -6,13 +6,10 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "plugins": [
-      {
-        "transform": "typia/lib/transform"
-      }
-    ],
+    "skipLibCheck": true,
     "strict": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "verbatimModuleSyntax": true
   },
   "exclude": ["dist"],
   "extends": "astro/tsconfigs/strict",

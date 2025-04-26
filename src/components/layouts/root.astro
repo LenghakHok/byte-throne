@@ -2,6 +2,7 @@
 import "@/styles/globals.css";
 
 import { ClientRouter } from "astro:transitions";
+import { RootLayout } from "./root";
 ---
 
 <script is:inline>
@@ -38,6 +39,8 @@ import { ClientRouter } from "astro:transitions";
     <ClientRouter />
   </head>
   <body>
-    <slot />
+    <RootLayout client:only="react">
+      <slot />
+    </RootLayout>
   </body>
 </html>
