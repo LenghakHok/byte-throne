@@ -6,38 +6,25 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
-import { useEffect, useState, type ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithRef } from "react";
+import React from "react";
 
 export function ThemesToggle(props: ComponentPropsWithRef<typeof Button>) {
-  // Initialize state with a function to ensure it gets the current value from localStorage
-  const [theme, setThemeState] = useState<"theme-light" | "dark" | "system">(
-    () => {
-      // This runs on component mount in the client
-      if (
-        typeof localStorage !== "undefined" &&
-        localStorage.getItem("theme")
-      ) {
-        return localStorage.getItem("theme") as
-          | "theme-light"
-          | "dark"
-          | "system";
-      }
-      return "theme-light";
-    },
-  );
+  const [theme, setThemeState] = React.useState<
+    "theme-light" | "dark" | "system"
+  >("theme-light");
 
-  // Apply theme changes
-  useEffect(() => {
+  React.useEffect(() => {
+    const isDarkMode = document.documentElement.classList.contains("dark");
+    setThemeState(isDarkMode ? "dark" : "theme-light");
+  }, []);
+
+  React.useEffect(() => {
     const isDark =
       theme === "dark" ||
       (theme === "system" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-    // Update DOM
-    document.documentElement.classList.toggle("dark", isDark);
-
-    // Persist setting
-    localStorage.setItem("theme", theme);
+    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
   }, [theme]);
 
   return (

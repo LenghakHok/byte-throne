@@ -5,30 +5,27 @@ import { ClientRouter } from "astro:transitions";
 ---
 
 <script is:inline>
-  // Get theme from localStorage or system preference
   const getThemePreference = () => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       return localStorage.getItem("theme");
     }
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
-      : "theme-light";
+      : "light";
   };
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
 
-  // Apply theme immediately
-  const theme = getThemePreference();
-  document.documentElement.classList.toggle("dark", theme === "dark");
-
-  // Store the current theme for React to access
   if (typeof localStorage !== "undefined") {
-    localStorage.setItem("theme", theme);
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
   }
-
-  // Handle Astro page transitions
-  document.addEventListener("astro:before-swap", (ev) => {
-    const isDark = document.documentElement.classList.contains("dark");
-    ev.newDocument.documentElement.classList.toggle("dark", isDark);
-  });
 </script>
 
 <html transition:persist transition:animate="none" lang="en">
