@@ -1,17 +1,10 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[Feat] : Describe the requested feature"
+title: "[FEAT] : "
 labels: ''
 assignees: ''
 
----
-
----
-name: 🚀 Feature Request / Missing Feature
-about: Suggest a new feature or report a missing functionality
-title: "[Feature Request]: "
-labels: enhancement, needs-triage
 ---
 
 ## 🚀 Feature Description
