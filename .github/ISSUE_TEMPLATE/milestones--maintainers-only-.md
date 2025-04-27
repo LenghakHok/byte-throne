@@ -1,7 +1,7 @@
 ---
 name: Milestones (Maintainers only)
 about: Track small tasks like features, sub-features, patches, and dependency updates.
-title: ''
+title: "[MILESTONE]:"
 labels: enhancement
 assignees: ''
 
