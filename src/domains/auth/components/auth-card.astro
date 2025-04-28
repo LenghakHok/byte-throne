@@ -1,0 +1,19 @@
+---
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/cn";
+import type { ComponentPropsWithRef } from "react";
+
+interface Props extends ComponentPropsWithRef<typeof Card> {}
+
+const { className, ...props } = Astro.props;
+---
+
+<Card
+  className={cn(
+    "relative z-10 w-full max-w-sm gap-0 overflow-hidden bg-accent p-1",
+    className
+  )}
+  {...props}
+>
+  <slot />
+</Card>

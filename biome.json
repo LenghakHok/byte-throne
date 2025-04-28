@@ -1,23 +1,17 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "assists": {
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "assist": {
     "actions": {
+      "recommended": true,
       "source": {
-        "sortJsxProps": "on",
-        "useSortedKeys": "on"
+        "organizeImports": "on",
+        "recommended": true,
+        "useSortedAttributes": "on",
+        "useSortedKeys": "on",
+        "useSortedProperties": "on"
       }
     },
-    "enabled": true,
-    "ignore": [
-      ".idea",
-      "*.astro",
-      ".astro",
-      ".vercel",
-      ".turbo",
-      "build",
-      "dist",
-      "node_modules"
-    ]
+    "enabled": true
   },
   "css": {
     "formatter": {
@@ -27,25 +21,39 @@
       "enabled": true
     }
   },
+  "files": {
+    "includes": [
+      "!dist/**",
+      "!.astro/**",
+      "!node_modules/**",
+      "!npm-debug.log*",
+      "!yarn-debug.log*",
+      "!yarn-error.log*",
+      "!pnpm-debug.log*",
+      "!.DS_Store",
+      "!.idea/**",
+      "!.turbo/**",
+      "!.vercel/**"
+    ]
+  },
   "formatter": {
     "attributePosition": "multiline",
     "bracketSpacing": true,
     "enabled": true,
     "formatWithErrors": true,
-    "ignore": [
-      ".idea",
-      "*.astro",
-      ".astro",
-      ".vercel",
-      ".turbo",
-      "build",
-      "dist",
-      "node_modules"
-    ],
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 80
+  },
+  "html": {
+    "formatter": {
+      "attributePosition": "multiline",
+      "bracketSameLine": true,
+      "enabled": true,
+      "indentScriptAndStyle": true,
+      "whitespaceSensitivity": "strict"
+    }
   },
   "javascript": {
     "formatter": {
@@ -59,43 +67,33 @@
     }
   },
   "linter": {
+    "domains": {
+      "react": "recommended"
+    },
     "enabled": true,
-    "ignore": [
-      ".idea",
-      "*.astro",
-      ".prettierrc",
-      ".astro",
-      ".vercel",
-      ".turbo",
-      "build",
-      "dist",
-      "node_modules"
-    ],
     "rules": {
       "a11y": {
-        "all": true
+        "recommended": true
       },
-      "all": true,
       "complexity": {
-        "all": true
+        "recommended": true
       },
       "correctness": {
-        "all": true,
         "noNodejsModules": "off",
         "noUndeclaredDependencies": "off",
+        "recommended": true,
         "useImportExtensions": "off"
       },
       "nursery": {
-        "all": true,
         "noProcessEnv": "off",
         "noSecrets": "off",
+        "recommended": true,
         "useComponentExportOnlyModules": "off",
         "useConsistentCurlyBraces": {
           "fix": "safe",
           "level": "error"
         },
         "useExplicitType": "off",
-        "useImportRestrictions": "off",
         "useSortedClasses": {
           "fix": "safe",
           "level": "error",
@@ -106,42 +104,29 @@
         }
       },
       "performance": {
-        "all": true,
-        "noBarrelFile": "off"
+        "noBarrelFile": "off",
+        "recommended": true
       },
       "security": {
-        "all": true
+        "recommended": true
       },
       "style": {
-        "all": true,
         "noDefaultExport": "off",
         "noNamespaceImport": "off",
         "noParameterAssign": "warn",
         "noParameterProperties": "off",
+        "recommended": true,
         "useExplicitLengthCheck": "off",
         "useFilenamingConvention": "off",
         "useNamingConvention": "off"
       },
       "suspicious": {
-        "all": true,
         "noConsole": "off",
-        "noConsoleLog": "off",
         "noExplicitAny": "off",
-        "noReactSpecificProps": "off"
+        "noReactSpecificProps": "off",
+        "recommended": true
       }
     }
   },
-  "organizeImports": {
-    "enabled": false,
-    "ignore": [
-      ".idea",
-      "*.astro",
-      ".astro",
-      ".vercel",
-      ".turbo",
-      "build",
-      "dist",
-      "node_modules"
-    ]
-  }
+  "vcs": { "clientKind": "git", "enabled": true, "useIgnoreFile": true }
 }
