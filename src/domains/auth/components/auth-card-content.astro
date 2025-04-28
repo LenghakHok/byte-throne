@@ -1,0 +1,22 @@
+---
+import { ThemesToggle } from "@/components/core/themes-toggle";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/cn";
+import type { ComponentPropsWithRef } from "react";
+
+interface Props extends ComponentPropsWithRef<typeof Card> {}
+
+const { className, ...props } = Astro.props;
+---
+
+<Card
+  className={cn("flex flex-col rounded-lg shadow-none", className)}
+  {...props}
+>
+  <ThemesToggle
+    client:load
+    className="absolute top-1 right-1 rounded-lg rounded-tl-none rounded-br-none border-1 border-t-accent! border-r-accent! border-b-border! border-l-border! bg-accent! transition-none"
+    variant="outline"
+  />
+  <slot />
+</Card>

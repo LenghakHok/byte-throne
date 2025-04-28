@@ -1,5 +1,5 @@
 ---
-import Root from "@/components/layouts/root.astro";
+import RootLayout from '@/components/layouts/root-layout.astro';
 
 interface Props {
   error: unknown;
@@ -8,6 +8,6 @@ interface Props {
 const { error } = Astro.props;
 ---
 
-<Root>
+<RootLayout>
   {error instanceof Error ? error.message : "Internal Server Error"}
-</Root>
+</RootLayout>

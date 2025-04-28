@@ -1,11 +1,4 @@
 {
-  "[astro]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll.ts": "always"
-    },
-    "editor.defaultFormatter": "astro-build.astro-vscode",
-    "editor.formatOnSave": true
-  },
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "always",
     "source.organizeLinkDefinitions": "always",

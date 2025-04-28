@@ -2,7 +2,7 @@
 import "@/styles/globals.css";
 
 import { ClientRouter } from "astro:transitions";
-import { RootLayout } from "./root";
+import { RootLayout as Root } from "./root-layout";
 ---
 
 <script is:inline>
@@ -41,8 +41,8 @@ import { RootLayout } from "./root";
   <body
     class="relative flex h-dvh w-full flex-col items-center justify-center overflow-hidden"
   >
-    <RootLayout client:only="react">
+    <Root client:only="react">
       <slot />
-    </RootLayout>
+    </Root>
   </body>
 </html>

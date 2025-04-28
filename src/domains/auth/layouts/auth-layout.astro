@@ -1,0 +1,21 @@
+---
+import RootLayout from "@/components/layouts/root-layout.astro";
+import { cn } from "@/lib/cn";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"main"> {}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<RootLayout>
+  <main
+    class={cn(
+      "relative flex size-full min-h-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background",
+      className
+    )}
+    {...props}
+  >
+    <slot />
+  </main>
+</RootLayout>
