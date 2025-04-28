@@ -5,14 +5,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useThemes } from "@/hooks/use-themes";
+import { theme$ } from "@/stores/theme-store";
 import { observer } from "@legendapp/state/react";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
 
 export const ThemesToggle = observer(
   (props: ComponentPropsWithRef<typeof Button>) => {
-    const { theme$ } = useThemes();
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild={true}>
@@ -27,7 +26,7 @@ export const ThemesToggle = observer(
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={() => theme$.set("theme-light")}>
+          <DropdownMenuItem onClick={() => theme$.set("light")}>
             <SunIcon />
             <span>Light</span>
           </DropdownMenuItem>

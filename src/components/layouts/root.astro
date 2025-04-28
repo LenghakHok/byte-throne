@@ -38,7 +38,9 @@ import { RootLayout } from "./root";
     <title>Byte-Throne</title>
     <ClientRouter />
   </head>
-  <body>
+  <body
+    class="relative flex h-dvh w-full flex-col items-center justify-center overflow-hidden"
+  >
     <RootLayout client:only="react">
       <slot />
     </RootLayout>
