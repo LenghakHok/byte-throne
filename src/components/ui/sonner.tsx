@@ -1,12 +1,11 @@
 "use client";
 
-import { useTheme } from "next-themes";
+import { theme$ } from "@/stores/theme-store";
+import { observer } from "@legendapp/state/react";
 import type React from "react";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
-const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme();
-
+export const Toaster = observer(({ ...props }: ToasterProps) => {
   return (
     <Sonner
       className="toaster group"
@@ -17,10 +16,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
           "--normal-border": "var(--border)",
         } as React.CSSProperties
       }
-      theme={theme as ToasterProps["theme"]}
+      theme={theme$.get() as ToasterProps["theme"]}
       {...props}
     />
   );
-};
-
-export { Toaster };
+});
