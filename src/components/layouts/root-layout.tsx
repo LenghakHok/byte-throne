@@ -25,7 +25,7 @@ export const RootLayout = observer(({ children }: PropsWithChildren) => {
     <Providers>
       {children}
       <Particles
-        className="-z-1 absolute inset-0"
+        className="absolute inset-0"
         color={color$.get()}
         ease={80}
         quantity={100}
