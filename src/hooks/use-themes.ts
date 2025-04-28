@@ -1,23 +1,34 @@
-import { useEffectOnce } from "@legendapp/state/react";
-import React, { useEffect } from "react";
+import { observable } from "@legendapp/state";
+import {
+  useComputed,
+  useObserve,
+  useObserveEffect,
+} from "@legendapp/state/react";
+
+const theme$ = observable<"theme-light" | "dark" | "system">("theme-light");
 
 export function useThemes() {
-  const [theme, setThemeState] = React.useState<
-    "theme-light" | "dark" | "system"
-  >("theme-light");
+  const resolvedTheme$ = useComputed<"dark" | "theme-light">(() =>
+    theme$.get() === "dark" ||
+    (theme$.get() === "system" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ? "dark"
+      : "theme-light",
+  );
 
-  useEffectOnce(() => {
-    const isDarkMode = document.documentElement.classList.contains("dark");
-    setThemeState(isDarkMode ? "dark" : "theme-light");
-  }, []);
+  useObserve(
+    () => {
+      const isDarkMode = document.documentElement.classList.contains("dark");
+      theme$.set(isDarkMode ? "dark" : "theme-light");
+    },
+    { deps: [document] },
+  );
 
-  useEffect(() => {
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-  }, [theme]);
+  useObserveEffect(() => {
+    document.documentElement.classList[
+      resolvedTheme$.get() === "dark" ? "add" : "remove"
+    ]("dark");
+  });
 
-  return { theme, setThemeState };
+  return { resolvedTheme$, theme$ };
 }
