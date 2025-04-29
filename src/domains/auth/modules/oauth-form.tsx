@@ -8,7 +8,6 @@ import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/cn";
 import { typiaResolver } from "@/lib/typia-resolver";
 import { For } from "@/utils/for";
-import { AtSignIcon } from "lucide-react";
 import { useCallback, type ComponentPropsWithRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -75,8 +74,8 @@ export function OAuthForm({
     <FormProvider {...form}>
       <form
         className={cn(
-          "flex w-full flex-wrap gap-4",
-          "[&_button_svg]:-translate-y-1/2 [&_button]:relative [&_button_svg]:absolute [&_button_svg]:top-1/2 [&_button_svg]:left-4",
+          "grid grid-cols-2 gap-4 sm:grid-cols-4",
+          "[&_button]:relative",
           className,
         )}
         onSubmit={form.handleSubmit(onSubmit)}
@@ -86,28 +85,19 @@ export function OAuthForm({
           each={oauthProviders}
           render={(provider) => (
             <Button
-              className="w-full rounded-full transition-none"
+              className="transition-none"
               key={provider.name}
               onClick={() => form.setValue("provider", provider.name)}
               variant="outline"
             >
-              <provider.icon />
-              <span>
+              <provider.icon className="size-4.5!" />
+              <span className="sr-only">
                 Continue with
                 <span className="capitalize"> {provider.name}</span>
               </span>
             </Button>
           )}
         />
-
-        <Button
-          className="w-full rounded-full transition-none"
-          type="button"
-          variant="outline"
-        >
-          <AtSignIcon />
-          <span>Continue with Email</span>
-        </Button>
       </form>
     </FormProvider>
   );
