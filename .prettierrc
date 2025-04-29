@@ -1,0 +1,19 @@
+{
+  "overrides": [
+    {
+      "excludeFiles": "**/*",
+      "files": "*.astro",
+      "options": {
+        "arrowParens": "always",
+        "bracketSameLine": true,
+        "endOfLine": "lf",
+        "parser": "astro",
+        "singleAttributePerLine": false,
+        "singleQuote": false,
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    }
+  ],
+  "plugins": ["prettier-plugin-astro"]
+}

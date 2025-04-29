@@ -10,6 +10,7 @@
     "enabled": true,
     "ignore": [
       ".astro",
+      "*.astro",
       ".idea",
       ".next",
       ".vercel",
@@ -35,6 +36,7 @@
     "formatWithErrors": true,
     "ignore": [
       ".astro",
+      "*.astro",
       ".idea",
       ".next",
       ".vercel",
@@ -64,6 +66,7 @@
     "enabled": true,
     "ignore": [
       ".astro",
+      "*.astro",
       ".idea",
       ".next",
       ".vercel",
@@ -137,6 +140,7 @@
     "enabled": false,
     "ignore": [
       ".astro",
+      "*.astro",
       ".idea",
       ".next",
       ".vercel",
@@ -149,6 +153,9 @@
   },
   "overrides": [
     {
+      "formatter": {
+        "enabled": false
+      },
       "include": ["*.astro"],
       "linter": {
         "rules": {
