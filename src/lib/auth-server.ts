@@ -1,4 +1,5 @@
-import { db } from "@/db"; // your drizzle instance
+import { db } from "@/db";
+import * as schema from "@/db/schema";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import {
@@ -8,10 +9,7 @@ import {
   organization,
 } from "better-auth/plugins";
 
-import * as schema from "@/db/schema";
-
 export const auth = betterAuth({
-  basePath: "/",
   database: drizzleAdapter(db, {
     provider: "pg",
     usePlural: true,
@@ -21,6 +19,12 @@ export const auth = betterAuth({
   rateLimit: {
     enabled: true,
     storage: "memory",
+  },
+  emailAndPassword: { enabled: true, autoSignIn: true },
+  emailVerification: {
+    sendOnSignUp: true,
+    autoSignInAfterVerification: true,
+    expiresIn: 12 * 60 * 1000, //12 hours expiration
   },
   socialProviders: {
     discord: {

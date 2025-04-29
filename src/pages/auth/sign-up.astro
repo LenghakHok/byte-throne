@@ -1,6 +1,4 @@
 ---
-import { PUBLIC_APP_NAME } from "astro:env/client";
-
 import { buttonVariants } from "@/components/ui/button";
 import {
   CardContent,
@@ -9,9 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Muted } from "@/components/ui/typography";
-
-import { cn } from "@/lib/cn";
-
 import AuthCardContent from "@/domains/auth/components/auth-card-content.astro";
 import AuthCardFooter from "@/domains/auth/components/auth-card-footer.astro";
 import AuthCard from "@/domains/auth/components/auth-card.astro";
@@ -19,6 +14,8 @@ import { OrSeparator } from "@/domains/auth/composites/or-separator";
 import AuthLayout from "@/domains/auth/layouts/auth-layout.astro";
 import { OAuthForm } from "@/domains/auth/modules/oauth-form";
 import { SignUpForm } from "@/domains/auth/modules/sign-up-form";
+import { cn } from "@/lib/cn";
+import { PUBLIC_APP_NAME } from "astro:env/client";
 ---
 
 <AuthLayout>
