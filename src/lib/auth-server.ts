@@ -31,10 +31,6 @@ export const auth = betterAuth({
       clientId: import.meta.env.DISCORD_CLIENT_ID,
       clientSecret: import.meta.env.DISCORD_CLIENT_SECRET,
     },
-    facebook: {
-      clientId: import.meta.env.FACEBOOK_APP_ID,
-      clientSecret: import.meta.env.FACEBOOK_APP_SECRET,
-    },
     github: {
       clientId: import.meta.env.GITHUB_CLIENT_ID,
       clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,

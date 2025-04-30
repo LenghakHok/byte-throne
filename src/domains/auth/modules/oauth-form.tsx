@@ -1,5 +1,4 @@
 import { DiscordIcon } from "@/components/icons/discord";
-import { FacebookIcon } from "@/components/icons/facebook";
 import { GithubIcon } from "@/components/icons/github";
 import { GoogleIcon } from "@/components/icons/google";
 import { Button } from "@/components/ui/button";
@@ -15,22 +14,20 @@ import {
   validateOAuthRequest,
   type OAuthRequest,
 } from "@/domains/auth/pipes/oauth.pipe";
+import { If } from "@/utils/if";
 
 interface Props extends ComponentPropsWithRef<"form"> {
   callbackURL?: string;
   requestSignUp?: boolean;
   errorCallbackURL?: string;
   newUserCallbackURL?: string;
+  standalone?: boolean;
 }
 
 const oauthProviders = [
   {
     name: "google" as const,
     icon: GoogleIcon,
-  },
-  {
-    name: "facebook" as const,
-    icon: FacebookIcon,
   },
   {
     name: "discord" as const,
@@ -48,6 +45,7 @@ export function OAuthForm({
   requestSignUp,
   errorCallbackURL,
   newUserCallbackURL,
+  standalone = true,
   ...props
 }: Props) {
   const form = useForm({
@@ -74,30 +72,53 @@ export function OAuthForm({
     <FormProvider {...form}>
       <form
         className={cn(
-          "grid grid-cols-2 gap-4 sm:grid-cols-4",
-          "[&_button]:relative",
+          !standalone &&
+            "grid grid-cols-2 gap-4 sm:grid-cols-4 [&_button]:relative",
+          standalone &&
+            "[&_button_svg]:-translate-y-1/2 flex w-full flex-wrap gap-4 [&_button]:relative [&_button_svg]:absolute [&_button_svg]:top-1/2 [&_button_svg]:left-4",
           className,
         )}
         onSubmit={form.handleSubmit(onSubmit)}
         {...props}
       >
-        <For
-          each={oauthProviders}
-          render={(provider) => (
-            <Button
-              className="transition-none"
-              key={provider.name}
-              onClick={() => form.setValue("provider", provider.name)}
-              variant="outline"
-            >
-              <provider.icon className="size-4.5!" />
-              <span className="sr-only">
-                Continue with
-                <span className="capitalize"> {provider.name}</span>
-              </span>
-            </Button>
-          )}
-        />
+        <If isTrue={!standalone}>
+          <For
+            each={oauthProviders}
+            render={(provider) => (
+              <Button
+                className="transition-none"
+                key={provider.name}
+                onClick={() => form.setValue("provider", provider.name)}
+                variant="outline"
+              >
+                <provider.icon className="size-4.5!" />
+                <span className="sr-only">
+                  Continue with
+                  <span className="capitalize"> {provider.name}</span>
+                </span>
+              </Button>
+            )}
+          />
+        </If>
+        <If isTrue={standalone}>
+          <For
+            each={oauthProviders}
+            render={(provider) => (
+              <Button
+                className="w-full transition-none"
+                key={provider.name}
+                onClick={() => form.setValue("provider", provider.name)}
+                variant="outline"
+              >
+                <provider.icon className="size-4.5!" />
+                <span>
+                  Continue with
+                  <span className="capitalize"> {provider.name}</span>
+                </span>
+              </Button>
+            )}
+          />
+        </If>
       </form>
     </FormProvider>
   );
