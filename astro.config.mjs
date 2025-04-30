@@ -93,15 +93,6 @@ export default defineConfig({
         context: "server",
       }),
 
-      FACEBOOK_APP_ID: envField.string({
-        access: "secret",
-        context: "server",
-      }),
-      FACEBOOK_APP_SECRET: envField.string({
-        access: "secret",
-        context: "server",
-      }),
-
       DISCORD_CLIENT_ID: envField.string({
         access: "secret",
         context: "server",

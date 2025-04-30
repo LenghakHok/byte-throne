@@ -32,7 +32,13 @@ import { RootLayout as Layout } from "@/components/layouts/root-layout";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" href="/svg/logo.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="/svg/logo-dark.svg"
+      media="(prefers-color-scheme: dark)"
+      type="image/svg+xml"
+    />
+    <link rel="icon" href="/svg/logo-light.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       rel="preconnect"
@@ -47,7 +53,7 @@ import { RootLayout as Layout } from "@/components/layouts/root-layout";
     <ClientRouter />
   </head>
   <body
-    class="relative flex h-dvh w-full flex-col items-center justify-center overflow-hidden"
+    class="relative flex h-dvh w-dvw flex-col items-center justify-center overflow-hidden"
   >
     <Layout client:only="react">
       <slot />

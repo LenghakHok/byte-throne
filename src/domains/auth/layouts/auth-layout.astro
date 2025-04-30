@@ -11,8 +11,8 @@ const { class: className, ...props } = Astro.props;
 <RootLayout>
   <main
     class={cn(
-      "relative flex size-full min-h-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background",
-      className
+      "relative flex size-full flex-col items-center justify-center overflow-hidden rounded-sm border bg-background",
+      className,
     )}
     {...props}
   >

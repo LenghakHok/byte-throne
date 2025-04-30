@@ -1,6 +1,5 @@
 ---
-import { PUBLIC_APP_NAME } from "astro:env/client";
-
+import { Logo } from "@/components/core/logo";
 import { buttonVariants } from "@/components/ui/button";
 import {
   CardContent,
@@ -9,28 +8,31 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Muted } from "@/components/ui/typography";
-
-import { cn } from "@/lib/cn";
-
 import AuthCardContent from "@/domains/auth/components/auth-card-content.astro";
 import AuthCardFooter from "@/domains/auth/components/auth-card-footer.astro";
 import AuthCard from "@/domains/auth/components/auth-card.astro";
 import AuthLayout from "@/domains/auth/layouts/auth-layout.astro";
-import { SignUpForm } from "@/domains/auth/modules/sign-up-form";
+import { OAuthForm } from "@/domains/auth/modules/oauth-form";
+import { cn } from "@/lib/cn";
+import { PUBLIC_APP_NAME } from "astro:env/client";
 ---
 
 <AuthLayout>
   <AuthCard>
     <AuthCardContent>
-      <CardHeader className="flex flex-col items-start justify-center">
-        <CardTitle className="font-bold text-2xl">Create an Account</CardTitle>
-        <CardDescription>
+      <CardHeader className="flex flex-col items-center justify-center">
+        <Logo />
+        <CardTitle className="font-bold text-2xl text-center">
+          Create an Account
+        </CardTitle>
+        <CardDescription className="text-center">
           Let&apos;s get you started to {PUBLIC_APP_NAME}
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        {/* <OAuthForm /> */}
-        <SignUpForm client:load />
+      <CardContent className="flex flex-col gap-4">
+        <!-- <SignUpForm client:load /> -->
+        <!-- <OrSeparator className="px-6" /> -->
+        <OAuthForm client:load />
       </CardContent>
     </AuthCardContent>
     <AuthCardFooter>

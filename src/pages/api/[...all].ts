@@ -16,7 +16,7 @@ app.use(requestId());
 app.use(secureHeaders());
 app.use(trimTrailingSlash());
 
-app.route("/api/auth", auth);
+app.route("/", auth);
 
 export const ALL: APIRoute = async (context) =>
   await app.fetch(context.request);

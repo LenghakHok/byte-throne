@@ -1,9 +1,55 @@
 ---
+import { Logo } from "@/components/core/logo";
+import { buttonVariants } from "@/components/ui/button";
+import {
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Muted } from "@/components/ui/typography";
+import AuthCardContent from "@/domains/auth/components/auth-card-content.astro";
+import AuthCardFooter from "@/domains/auth/components/auth-card-footer.astro";
+import AuthCard from "@/domains/auth/components/auth-card.astro";
 import AuthLayout from "@/domains/auth/layouts/auth-layout.astro";
+import { OAuthForm } from "@/domains/auth/modules/oauth-form";
+import { cn } from "@/lib/cn";
 ---
 
 <AuthLayout>
-  <!-- Form Container -->
-  <!-- Form -->
-  <!-- Footer -->
+  <AuthCard>
+    <AuthCardContent>
+      <CardHeader className="flex flex-col items-center justify-center">
+        <Logo />
+        <CardTitle className="text-center font-bold text-2xl">
+          Welcome back
+        </CardTitle>
+        <CardDescription className="text-center">
+          Great to see you - Let&apos;s get stated!
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
+        <!-- <SignInForm client:load />
+        <OrSeparator className="px-6" /> -->
+        <OAuthForm client:load />
+      </CardContent>
+    </AuthCardContent>
+    <AuthCardFooter>
+      <Muted className="text-center">
+        Do not have an account yet?
+        <a
+          class={cn(
+            buttonVariants({
+              variant: "link",
+              size: "sm",
+            }),
+            "font-bold",
+          )}
+          href="/auth/sign-up"
+        >
+          Sign Up
+        </a>
+      </Muted>
+    </AuthCardFooter>
+  </AuthCard>
 </AuthLayout>

@@ -8,8 +8,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { InputIcon } from "@/domains/auth/components/input-icon";
-import { InputPassword } from "@/domains/auth/components/input-password";
+import { InputIcon } from "@/domains/auth/composites/input-icon";
+import { InputPassword } from "@/domains/auth/composites/input-password";
 import {
   signUpRequestErrors,
   validateSignUpRequest,
@@ -55,7 +55,7 @@ export function SignUpForm() {
             name="givenName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-semibold">Given Name</FormLabel>
+                <FormLabel>Given Name</FormLabel>
                 <FormControl>
                   <InputIcon
                     icon={UserIcon}
@@ -74,7 +74,7 @@ export function SignUpForm() {
             name="familyName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-semibold">Family Name</FormLabel>
+                <FormLabel>Family Name</FormLabel>
                 <FormControl>
                   <InputIcon
                     icon={UserIcon}
@@ -94,7 +94,7 @@ export function SignUpForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-semibold">Email</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <InputIcon
                   icon={AtSignIcon}
@@ -113,7 +113,7 @@ export function SignUpForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-semibold">Password</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <InputPassword
                   className="placeholder:text-sm"
@@ -133,7 +133,7 @@ export function SignUpForm() {
             <FormItem className="flex flex-row items-center space-y-0 py-2">
               <FormControl>
                 <Checkbox
-                  checked={field.value}
+                  checked={field.value !== undefined ? field.value : false}
                   onCheckedChange={field.onChange}
                 />
               </FormControl>
