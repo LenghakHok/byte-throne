@@ -6,13 +6,15 @@ import vercel from "@astrojs/vercel";
 import unpluginTypia from "@ryoppippi/unplugin-typia/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [react()],
-
   vite: {
     plugins: [
+      // @ts-ignore
       tailwindcss(),
+      // @ts-ignore
       unpluginTypia({
         cache: false,
         typia: {
