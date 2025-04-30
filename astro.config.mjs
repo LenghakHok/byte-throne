@@ -9,10 +9,11 @@ import { defineConfig, envField } from "astro/config";
 // https://astro.build/config
 export default defineConfig({
   integrations: [react()],
-
   vite: {
     plugins: [
+      // @ts-ignore
       tailwindcss(),
+      // @ts-ignore
       unpluginTypia({
         cache: false,
         typia: {
