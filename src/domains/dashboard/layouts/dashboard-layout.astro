@@ -1,9 +1,11 @@
 ---
 import RootLayout from "@/components/layouts/root-layout.astro";
+import { Sidebar } from "@/domains/dashboard/composites/side-bar";
 ---
 
 <RootLayout>
   <main class="size-full flex flex-row bg-background">
+    <Sidebar client:load />
     <slot />
   </main>
 </RootLayout>
