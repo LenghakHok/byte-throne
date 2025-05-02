@@ -2,6 +2,7 @@
 import "@/styles/globals.css";
 
 import { ClientRouter } from "astro:transitions";
+import { Providers } from "@/components/providers";
 ---
 
 <script is:inline>
@@ -54,6 +55,8 @@ import { ClientRouter } from "astro:transitions";
   <body
     class="relative flex h-dvh w-dvw flex-col items-center justify-center overflow-hidden"
   >
-    <slot />
+    <Providers client:only="react">
+      <slot />
+    </Providers>
   </body>
 </html>

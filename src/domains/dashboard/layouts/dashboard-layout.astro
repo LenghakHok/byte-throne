@@ -4,8 +4,13 @@ import { Sidebar } from "@/domains/dashboard/composites/side-bar";
 ---
 
 <RootLayout>
-  <main class="size-full flex flex-row bg-background">
+  <main class="size-full flex flex-row bg-accent">
+    <!-- sidebar -->
     <Sidebar client:load />
+    <!-- Topbar -->
+    <section class="flex flex-col size-full">
+      <!--  -->
+    </section>
     <slot />
   </main>
 </RootLayout>

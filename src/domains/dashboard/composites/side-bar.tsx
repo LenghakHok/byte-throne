@@ -103,7 +103,7 @@ export function Sidebar({
   return (
     <SidebarProvider>
       <SidebarRoot
-        className="!w-16 overflow-hidden border-r"
+        className="!w-16 overflow-hidden bg-transparent"
         collapsible="none"
         {...props}
       >
@@ -139,7 +139,7 @@ export function Sidebar({
                             key={`${nav[0]}_${item.title}`}
                           >
                             <SidebarMenuButton
-                              className="size-fit rounded-full p-3 text-muted-foreground [&>svg]:size-4.5"
+                              className="size-fit rounded-full p-3 text-muted-foreground transition-colors dark:text-sidebar-foreground [&>svg]:size-4.5"
                               isActive={activeItem?.title === item.title}
                               onClick={() => {
                                 setActiveItem(item);
@@ -180,7 +180,7 @@ export function Sidebar({
                       key={`misc_${item.title}`}
                     >
                       <SidebarMenuButton
-                        className="size-fit rounded-full p-3 text-muted-foreground [&>svg]:size-4.5"
+                        className="size-fit rounded-full p-3 text-muted-foreground dark:text-sidebar-foreground [&>svg]:size-4.5"
                         isActive={activeItem?.title === item.title}
                         onClick={() => {
                           setActiveItem(item);
