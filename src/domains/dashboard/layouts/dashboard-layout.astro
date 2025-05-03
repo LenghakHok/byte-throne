@@ -1,7 +1,15 @@
 ---
 import RootLayout from "@/components/layouts/root-layout.astro";
+import { ProfileDropdown } from "@/domains/dashboard/composites/profile";
 import { Sidebar } from "@/domains/dashboard/composites/sidebar";
 import { TobarSearch, Topbar } from "@/domains/dashboard/composites/topbar";
+import { authClient } from "@/lib/auth-client";
+
+const session = await authClient.getSession();
+
+if (!session.data?.session || !session.data.user) {
+  return;
+}
 ---
 
 <RootLayout>
@@ -11,6 +19,11 @@ import { TobarSearch, Topbar } from "@/domains/dashboard/composites/topbar";
 
     <Topbar>
       <TobarSearch client:load />
+      <ProfileDropdown
+        session={session.data?.session}
+        user={session.data.user}
+        client:load
+      />
     </Topbar>
 
     <section class="flex flex-col size-full">
