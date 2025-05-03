@@ -1,16 +1,20 @@
 ---
 import RootLayout from "@/components/layouts/root-layout.astro";
-import { Sidebar } from "@/domains/dashboard/composites/side-bar";
+import { Sidebar } from "@/domains/dashboard/composites/sidebar";
+import { TobarSearch, Topbar } from "@/domains/dashboard/composites/topbar";
 ---
 
 <RootLayout>
   <main class="size-full flex flex-row bg-accent">
     <!-- sidebar -->
     <Sidebar client:load />
-    <!-- Topbar -->
+
+    <Topbar>
+      <TobarSearch client:load />
+    </Topbar>
+
     <section class="flex flex-col size-full">
-      <!--  -->
+      <slot />
     </section>
-    <slot />
   </main>
 </RootLayout>

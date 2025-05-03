@@ -1,0 +1,64 @@
+import { Button } from "@/components/ui/button";
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { command$ } from "@/domains/stores/command-store";
+import { cn } from "@/lib/cn";
+import { observer, useObservable } from "@legendapp/state/react";
+import { SearchIcon } from "lucide-react";
+import type { ComponentPropsWithRef } from "react";
+
+export function Topbar({
+  className,
+  children,
+  ...props
+}: ComponentPropsWithRef<"header">) {
+  return (
+    <header
+      className={cn("flex h-12 w-full items-center justify-center", className)}
+      {...props}
+    >
+      {children}
+    </header>
+  );
+}
+
+export const TobarSearch = observer(
+  (props: ComponentPropsWithRef<typeof Button>) => {
+    const open$ = useObservable(command$);
+
+    return (
+      <>
+        <Button
+          className="rounded-full"
+          onClick={() => open$.set(true)}
+          size="icon"
+          variant="outline"
+          {...props}
+        >
+          <span className="sr-only">Search</span>
+          <SearchIcon />
+        </Button>
+        <CommandDialog
+          onOpenChange={(v) => open$.set(v)}
+          open={open$.get()}
+        >
+          <CommandInput placeholder="Type a command or search..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <CommandItem>Calendar</CommandItem>
+              <CommandItem>Search Emoji</CommandItem>
+              <CommandItem>Calculator</CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </CommandDialog>
+      </>
+    );
+  },
+);

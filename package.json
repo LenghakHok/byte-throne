@@ -36,6 +36,7 @@
     "@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
     "@samchon/openapi": "^4.2.0",
     "@sinclair/typebox": "^0.34.33",
+    "@tanstack/react-query": "^5.75.1",
     "astro": "^5.7.10",
     "better-auth": "^1.2.7",
     "class-variance-authority": "^0.7.1",
