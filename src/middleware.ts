@@ -19,6 +19,7 @@ const auth = defineMiddleware(async (context, next) => {
   if (session !== null) {
     context.locals.session = session;
   }
+
   return next();
 });
 

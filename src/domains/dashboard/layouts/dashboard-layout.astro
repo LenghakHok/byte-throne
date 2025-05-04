@@ -1,17 +1,37 @@
 ---
+import { ParticlesLayout } from "@/components/layouts/particles-layout";
 import RootLayout from "@/components/layouts/root-layout.astro";
-import { Sidebar } from "@/domains/dashboard/modules/sidebar";
+import { Separator } from "@/components/ui/separator";
+import { TobarSearch } from "@/domains/dashboard/composites/topbar";
+import { NavBar } from "@/domains/dashboard/modules/navbar";
+import { ProfileDropdown } from "@/domains/dashboard/modules/profile";
 
+const session = Astro.locals.session!;
 const pathname = Astro.originPathname;
 ---
 
 <RootLayout>
-  <main class="size-full flex flex-row bg-accent">
-    <!-- sidebar -->
-    <Sidebar pathname={pathname} client:load />
+  <ParticlesLayout client:load>
+    <main class="size-full flex flex-col items-center z-10">
+      <NavBar pathname={pathname} className="container justify-center">
+        <Separator className="bg-transparent w-full shrink" />
+        <div class="flex flex-row gap-2">
+          <TobarSearch
+            client:load
+            className="text-muted-foreground rounded-full"
+          />
 
-    <section class="w-full flex flex-col">
-      <slot />
-    </section>
-  </main>
+          <ProfileDropdown
+            session={session?.session}
+            user={session?.user}
+            client:load
+          />
+        </div>
+      </NavBar>
+
+      <section class="w-full flex flex-col container">
+        <slot />
+      </section>
+    </main>
+  </ParticlesLayout>
 </RootLayout>

@@ -47,7 +47,7 @@ export function ProfileDropdown({
         align="end"
         className="min-w-xs"
       >
-        <DropdownMenuGroup>
+        <DropdownMenuGroup className="p-1">
           <div className="justify-end-safe flex flex-col items-center gap-4 p-2">
             <ProfileDisplay
               className="w-full"
@@ -69,11 +69,11 @@ export function ProfileDropdown({
           </div>
         </DropdownMenuGroup>
         {/* Organization */}
-        <DropdownMenuGroup>
+        <DropdownMenuGroup className="p-1">
           <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
             Organization
           </DropdownMenuLabel>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="gap-3">
             <BadgePlusIcon />
             <span>Create an Organization</span>
           </DropdownMenuItem>
@@ -82,19 +82,19 @@ export function ProfileDropdown({
         <DropdownMenuSeparator />
 
         {/* Accounts */}
-        <DropdownMenuGroup>
+        <DropdownMenuGroup className="p-1">
           <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
             Account
           </DropdownMenuLabel>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="gap-3">
             <UserCogIcon />
             <span>Manage Account</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="gap-3">
             <ActivityIcon />
             <span>Activity</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="gap-3">
             <SettingsIcon />
             <span>Settings</span>
           </DropdownMenuItem>
@@ -103,19 +103,19 @@ export function ProfileDropdown({
         <DropdownMenuSeparator />
 
         {/* Accounts */}
-        <DropdownMenuGroup>
+        <DropdownMenuGroup className="p-1">
           <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
             Support
           </DropdownMenuLabel>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="gap-3">
             <BadgeHelpIcon />
             <span>Help & Supports</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="gap-3">
             <MessageSquareMoreIcon />
             <span>FAQs</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="gap-3">
             <BugIcon />
             <span>Bug Reports</span>
           </DropdownMenuItem>

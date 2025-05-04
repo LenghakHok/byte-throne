@@ -12,90 +12,13 @@ import {
   Sidebar as SidebarRoot,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { misc, navs } from "@/domains/dashboard/constants/sidebar-route";
 import { For } from "@/utils/for";
-import {
-  BadgeHelpIcon,
-  BoxIcon,
-  CalendarFoldIcon,
-  CastleIcon,
-  CompassIcon,
-  CrownIcon,
-  HomeIcon,
-  SettingsIcon,
-  SwordsIcon,
-} from "lucide-react";
 import React from "react";
 
 interface Props extends React.ComponentProps<typeof SidebarRoot> {
   pathname: string;
 }
-
-// This is sample data
-const navs = {
-  general: [
-    {
-      title: "Home",
-      url: "/dashboard",
-      icon: HomeIcon,
-      isActive: true,
-    },
-  ],
-  fun: [
-    {
-      title: "Explore",
-      url: "/explore",
-      icon: CompassIcon,
-      isActive: false,
-    },
-    {
-      title: "Competition",
-      url: "/competition",
-      icon: SwordsIcon,
-      isActive: false,
-    },
-    {
-      title: "Leaderboard",
-      url: "/leaderboard",
-      icon: CrownIcon,
-      isActive: false,
-    },
-  ],
-  management: [
-    {
-      title: "Events",
-      url: "/events",
-      icon: CalendarFoldIcon,
-      isActive: false,
-    },
-    {
-      title: "Projects",
-      url: "/projects",
-      icon: BoxIcon,
-      isActive: false,
-    },
-    {
-      title: "Teams",
-      url: "/teams",
-      icon: CastleIcon,
-      isActive: false,
-    },
-  ],
-};
-
-const misc = [
-  {
-    title: "Helps & Supports",
-    url: "/help",
-    icon: BadgeHelpIcon,
-    isActive: false,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: SettingsIcon,
-    isActive: false,
-  },
-];
 
 export function Sidebar({ pathname, ...props }: Props) {
   // Note: I'm using state to show active item.

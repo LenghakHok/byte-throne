@@ -12,7 +12,7 @@ export function UserAvatar({ user, ...props }: Props) {
         alt="profile"
         src={user.image ?? ""}
       />
-      <AvatarFallback>{user.name[0]}</AvatarFallback>
+      <AvatarFallback className="border">{user.name[0]}</AvatarFallback>
     </Avatar>
   );
 }

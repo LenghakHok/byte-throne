@@ -6,7 +6,7 @@ import type { PropsWithChildren } from "react";
 
 const color$ = observable("#000000");
 
-export const AuthLayout = observer(({ children }: PropsWithChildren) => {
+export const ParticlesLayout = observer(({ children }: PropsWithChildren) => {
   useObserveEffect(
     () => {
       if (resolvedTheme$.get() === "dark") {
