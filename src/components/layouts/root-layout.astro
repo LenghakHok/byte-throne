@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 
 import { ClientRouter } from "astro:transitions";
 import { Providers } from "@/components/providers";
+import { Favicon } from "@/components/core/favicon";
 ---
 
 <script is:inline>
@@ -34,14 +35,8 @@ import { Providers } from "@/components/providers";
     <meta name="generator" content={Astro.generator} />
     <link
       rel="icon"
-      href="/svg/logo-dark.svg"
+      href="/svg/icon-dark.svg"
       media="(prefers-color-scheme: dark)"
-      type="image/svg+xml"
-    />
-    <link
-      rel="icon"
-      href="/svg/logo-light.svg"
-      media="(prefers-color-scheme: light)"
       type="image/svg+xml"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,6 +50,7 @@ import { Providers } from "@/components/providers";
       rel="stylesheet"
     />
     <title>Byte-Throne</title>
+    <Favicon />
     <ClientRouter />
   </head>
   <body
