@@ -84,7 +84,7 @@ const navs = {
 
 const misc = [
   {
-    title: "Help",
+    title: "Helps & Supports",
     url: "/help",
     icon: BadgeHelpIcon,
     isActive: false,
@@ -178,7 +178,7 @@ export function Sidebar({ pathname, ...props }: Props) {
             )}
           />
         </SidebarContent>
-        <SidebarFooter className="mx-auto p-0">
+        <SidebarFooter className="mx-auto mb-6 p-0">
           <SidebarGroup>
             <SidebarGroupContent>
               <SidebarMenu className="space-y-2">

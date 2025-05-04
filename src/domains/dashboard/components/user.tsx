@@ -8,7 +8,10 @@ type Props = ComponentPropsWithRef<typeof Avatar> &
 export function UserAvatar({ user, ...props }: Props) {
   return (
     <Avatar {...props}>
-      <AvatarImage src={user.image ?? ""} />
+      <AvatarImage
+        alt="profile"
+        src={user.image ?? ""}
+      />
       <AvatarFallback>{user.name[0]}</AvatarFallback>
     </Avatar>
   );
