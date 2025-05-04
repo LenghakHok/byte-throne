@@ -1,24 +1,25 @@
-import { auth } from "@/lib/auth-server";
+import { auth as betterAuth } from "@/lib/auth-server";
 import { defineMiddleware, sequence } from "astro:middleware";
 
 const forbidden = ["/dashboard", "/teams"];
 
-const authMiddleware = defineMiddleware(async (context, next) => {
-  const response = await next();
-  const session = await auth.api.getSession({
+const auth = defineMiddleware(async (context, next) => {
+  const session = await betterAuth.api.getSession({
     headers: context.request.headers,
   });
 
-  // context.locals.session = session;
-
   if (
     forbidden.some((v) => context.originPathname.startsWith(v)) &&
-    !session?.session.id
+    session === null
   ) {
     return context.redirect("/auth/sign-in");
   }
 
-  return response;
+  // session will already asserted to not null since we have checked
+  if (session !== null) {
+    context.locals.session = session;
+  }
+  return next();
 });
 
-export const onRequest = sequence(authMiddleware);
+export const onRequest = sequence(auth);

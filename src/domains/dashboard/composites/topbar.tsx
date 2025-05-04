@@ -20,7 +20,10 @@ export function Topbar({
 }: ComponentPropsWithRef<"header">) {
   return (
     <header
-      className={cn("flex h-12 w-full items-center justify-center", className)}
+      className={cn(
+        "flex h-12 w-full items-center justify-between px-4",
+        className,
+      )}
       {...props}
     >
       {children}
@@ -35,10 +38,10 @@ export const TobarSearch = observer(
     return (
       <>
         <Button
-          className="rounded-full"
+          className="cursor-pointer rounded-full"
           onClick={() => open$.set(true)}
           size="icon"
-          variant="outline"
+          variant="ghost"
           {...props}
         >
           <span className="sr-only">Search</span>

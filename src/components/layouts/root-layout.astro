@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import { ClientRouter } from "astro:transitions";
 import { Providers } from "@/components/providers";
 import { Favicon } from "@/components/core/favicon";
+import { PUBLIC_APP_NAME } from "astro:env/client";
 ---
 
 <script is:inline>
@@ -49,7 +50,7 @@ import { Favicon } from "@/components/core/favicon";
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Recursive:wght@300..1000&display=swap"
       rel="stylesheet"
     />
-    <title>Byte-Throne</title>
+    <title>{PUBLIC_APP_NAME}</title>
     <Favicon />
     <ClientRouter />
   </head>

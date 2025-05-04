@@ -26,6 +26,10 @@ import {
 } from "lucide-react";
 import React from "react";
 
+interface Props extends React.ComponentProps<typeof SidebarRoot> {
+  pathname: string;
+}
+
 // This is sample data
 const navs = {
   general: [
@@ -93,15 +97,17 @@ const misc = [
   },
 ];
 
-export function Sidebar({
-  ...props
-}: React.ComponentProps<typeof SidebarRoot>) {
+export function Sidebar({ pathname, ...props }: Props) {
   // Note: I'm using state to show active item.
   // IRL you should use the url/router.
-  const [activeItem, setActiveItem] = React.useState(navs.general[0]);
+  const [activeItem, setActiveItem] = React.useState(
+    Object.values(navs)
+      .flat()
+      .filter((item) => pathname.startsWith(item.url))[0],
+  );
 
   return (
-    <SidebarProvider>
+    <SidebarProvider className="w-fit">
       <SidebarRoot
         className="!w-16 overflow-hidden bg-transparent"
         collapsible="none"
@@ -138,24 +144,30 @@ export function Sidebar({
                             className="size-fit"
                             key={`${nav[0]}_${item.title}`}
                           >
-                            <SidebarMenuButton
-                              className="size-fit rounded-full border border-transparent p-2 text-muted-foreground transition-colors data-[active=true]:border-border data-[active=true]:bg-card data-[active=true]:shadow-xs [&>svg]:size-4.5"
-                              isActive={activeItem?.title === item.title}
-                              onClick={() => {
-                                setActiveItem(item);
-                              }}
-                              tooltip={{
-                                children: (
-                                  <span className="font-bold">
-                                    {item.title}
-                                  </span>
-                                ),
-                                hidden: false,
-                              }}
+                            <a
+                              className="size-fit rounded-full"
+                              href={item.url}
+                              tabIndex={-1}
                             >
-                              <item.icon />
-                              <span className="sr-only">{item.title}</span>
-                            </SidebarMenuButton>
+                              <SidebarMenuButton
+                                className="size-fit rounded-full border border-transparent p-2 transition-colors data-[active=true]:border-border data-[active=true]:bg-card data-[active=true]:shadow-xs [&>svg]:size-4.5"
+                                isActive={activeItem?.title === item.title}
+                                onClick={() => {
+                                  setActiveItem(item);
+                                }}
+                                tooltip={{
+                                  children: (
+                                    <span className="font-bold">
+                                      {item.title}
+                                    </span>
+                                  ),
+                                  hidden: false,
+                                }}
+                              >
+                                <item.icon />
+                                <span className="sr-only">{item.title}</span>
+                              </SidebarMenuButton>
+                            </a>
                           </SidebarMenuItem>
                         )}
                       />
@@ -178,7 +190,7 @@ export function Sidebar({
                       key={`misc_${item.title}`}
                     >
                       <SidebarMenuButton
-                        className="size-fit rounded-full border border-transparent p-2 text-muted-foreground transition-colors data-[active=true]:border-border data-[active=true]:bg-card data-[active=true]:shadow-xs [&>svg]:size-4.5"
+                        className="size-fit rounded-full border border-transparent p-2 transition-colors data-[active=true]:border-border data-[active=true]:bg-card data-[active=true]:shadow-xs [&>svg]:size-4.5"
                         isActive={activeItem?.title === item.title}
                         onClick={() => {
                           setActiveItem(item);

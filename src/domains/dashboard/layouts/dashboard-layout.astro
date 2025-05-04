@@ -1,32 +1,16 @@
 ---
 import RootLayout from "@/components/layouts/root-layout.astro";
-import { ProfileDropdown } from "@/domains/dashboard/composites/profile";
-import { Sidebar } from "@/domains/dashboard/composites/sidebar";
-import { TobarSearch, Topbar } from "@/domains/dashboard/composites/topbar";
-import { authClient } from "@/lib/auth-client";
+import { Sidebar } from "@/domains/dashboard/modules/sidebar";
 
-const session = await authClient.getSession();
-
-if (!session.data?.session || !session.data.user) {
-  return;
-}
+const pathname = Astro.originPathname;
 ---
 
 <RootLayout>
   <main class="size-full flex flex-row bg-accent">
     <!-- sidebar -->
-    <Sidebar client:load />
+    <Sidebar pathname={pathname} client:load />
 
-    <Topbar>
-      <TobarSearch client:load />
-      <ProfileDropdown
-        session={session.data?.session}
-        user={session.data.user}
-        client:load
-      />
-    </Topbar>
-
-    <section class="flex flex-col size-full">
+    <section class="w-full flex flex-col">
       <slot />
     </section>
   </main>
