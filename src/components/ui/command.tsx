@@ -1,17 +1,21 @@
 "use client";
 
-import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { SearchIcon } from "lucide-react";
+import { CommandIcon } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "@/lib/cn";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { cn } from "@/lib/cn";
+import { Kbd } from "./kbd";
+import { Muted } from "./typography";
 
 function Command({
   className,
@@ -44,10 +48,44 @@ function CommandDialog({
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
-      <DialogContent className="overflow-hidden p-0">
-        <Command className="**:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+      <DialogContent className="gap-0 overflow-hidden bg-secondary p-0.5 focus-visible:outline-0 sm:max-w-2xl [&>button]:last:hidden">
+        <DialogClose className="absolute top-3 right-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0">
+          <Kbd>ESC</Kbd>
+          <span className="sr-only">Close</span>
+        </DialogClose>
+        <Command className="border pb-1 focus-visible:ring-0 **:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
           {children}
         </Command>
+        <DialogFooter className="w-full flex-row items-center gap-8 overflow-x-auto p-2 sm:justify-start">
+          <span className="inline-flex items-center justify-center space-x-2">
+            <Kbd>↑</Kbd>
+            <Kbd>↓</Kbd>
+            <Muted className="font-medium font-mono text-muted-foreground! text-xs uppercase">
+              Navigate
+            </Muted>
+          </span>
+
+          <span className="inline-flex items-center justify-center space-x-2">
+            <Kbd>RETURN</Kbd>
+            <Muted className="font-medium font-mono text-muted-foreground! text-xs uppercase">
+              Open
+            </Muted>
+          </span>
+
+          <span className="inline-flex items-center justify-center space-x-2">
+            <Kbd>ESC</Kbd>
+            <Muted className="font-medium font-mono text-muted-foreground! text-xs uppercase">
+              Close
+            </Muted>
+          </span>
+
+          <span className="inline-flex items-center justify-center space-x-2">
+            <Kbd>TAB</Kbd>
+            <Muted className="font-medium font-mono text-muted-foreground! text-xs uppercase">
+              Actions
+            </Muted>
+          </span>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
@@ -62,7 +100,7 @@ function CommandInput({
       className="flex h-9 items-center gap-2 border-b px-3"
       data-slot="command-input-wrapper"
     >
-      <SearchIcon className="size-4 shrink-0 opacity-50" />
+      <CommandIcon className="size-4 shrink-0 opacity-50" />
       <CommandPrimitive.Input
         className={cn(
           "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
@@ -167,11 +205,11 @@ function CommandShortcut({
 export {
   Command,
   CommandDialog,
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
-  CommandShortcut,
+  CommandList,
   CommandSeparator,
+  CommandShortcut,
 };

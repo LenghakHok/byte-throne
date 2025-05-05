@@ -9,15 +9,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Muted } from "@/components/ui/typography";
-import { UserAvatar } from "@/domains/dashboard/components/user";
+import { UserAvatar } from "@/domains/dashboard/components/user-avatar";
 import { cn } from "@/lib/cn";
 import {
   ActivityIcon,
   BadgeHelpIcon,
-  BadgePlusIcon,
   BugIcon,
   LogOutIcon,
   MessageSquareMoreIcon,
+  PlusIcon,
   SettingsIcon,
   UserCogIcon,
   UserPlusIcon,
@@ -74,7 +74,7 @@ export function ProfileDropdown({
             Organization
           </DropdownMenuLabel>
           <DropdownMenuItem className="gap-3">
-            <BadgePlusIcon />
+            <PlusIcon />
             <span>Create an Organization</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>

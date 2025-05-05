@@ -1,22 +1,25 @@
 import { Logo } from "@/components/core/logo";
 import { Navs } from "@/domains/dashboard/composites/navs";
-import { Header } from "@/domains/dashboard/composites/topbar";
+import { Topbar } from "@/domains/dashboard/composites/topbar";
 import { cn } from "@/lib/cn";
 import type { ComponentPropsWithRef } from "react";
 
-interface Props extends ComponentPropsWithRef<typeof Header> {
+interface Props extends ComponentPropsWithRef<typeof Topbar> {
   pathname: string;
 }
 
 export function NavBar({ className, children, pathname, ...props }: Props) {
   return (
-    <Header
-      className={cn("h-16 w-full justify-start gap-6", className)}
+    <Topbar
+      className={cn("h-16 w-full justify-start md:gap-6", className)}
       {...props}
     >
       <Logo className="[&_svg:not([class*='size-'])]:size-8" />
-      <Navs pathname={pathname} />
+      <Navs
+        className="hidden lg:flex"
+        pathname={pathname}
+      />
       {children}
-    </Header>
+    </Topbar>
   );
 }

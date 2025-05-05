@@ -1,5 +1,5 @@
 ---
-import { ThemesToggle } from "@/components/core/themes-toggle";
+import { ThemesToggle } from "@/components/composites/themes-toggle";
 import { ParticlesLayout } from "@/components/layouts/particles-layout";
 import RootLayout from "@/components/layouts/root-layout.astro";
 import { Separator } from "@/components/ui/separator";
@@ -14,8 +14,11 @@ const pathname = Astro.originPathname;
 
 <RootLayout>
   <ParticlesLayout client:load>
-    <main class="z-10 flex size-full flex-col items-center">
-      <NavBar pathname={pathname} className="container justify-center">
+    <main class="flex size-full flex-col items-center bg-secondary">
+      <NavBar
+        pathname={pathname}
+        className="container justify-center pr-2 lg:px-0 2xl:max-w-7xl"
+      >
         <Separator className="w-full shrink bg-transparent" />
         <div class="flex flex-row items-center justify-end gap-2">
           <TobarSearch
@@ -47,7 +50,7 @@ const pathname = Astro.originPathname;
         </div>
       </NavBar>
 
-      <section class="container flex w-full flex-col">
+      <section class="flex-2col container flex w-full p-4 lg:p-0 2xl:max-w-7xl">
         <slot />
       </section>
     </main>

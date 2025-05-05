@@ -13,7 +13,7 @@ import { observer, useObservable } from "@legendapp/state/react";
 import { SearchIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
 
-export function Header({
+export function Topbar({
   className,
   children,
   ...props
@@ -21,7 +21,7 @@ export function Header({
   return (
     <header
       className={cn(
-        "flex h-12 w-full items-center justify-between px-4 py-2",
+        "flex h-12 w-full items-center justify-between py-2",
         className,
       )}
       {...props}
