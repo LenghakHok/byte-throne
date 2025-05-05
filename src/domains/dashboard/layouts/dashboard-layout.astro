@@ -14,13 +14,13 @@ const pathname = Astro.originPathname;
 
 <RootLayout>
   <ParticlesLayout client:load>
-    <main class="size-full flex flex-col items-center z-10">
+    <main class="z-10 flex size-full flex-col items-center">
       <NavBar pathname={pathname} className="container justify-center">
-        <Separator className="bg-transparent w-full shrink" />
-        <div class="flex flex-row gap-2 items-center justify-end">
+        <Separator className="w-full shrink bg-transparent" />
+        <div class="flex flex-row items-center justify-end gap-2">
           <TobarSearch
             client:load
-            className="text-muted-foreground rounded-full"
+            className="rounded-full text-muted-foreground"
           />
 
           <Notification
@@ -30,7 +30,7 @@ const pathname = Astro.originPathname;
 
           <Separator
             orientation="vertical"
-            className="data-[orientation=vertical]:h-4 mx-2"
+            className="mx-2 data-[orientation=vertical]:h-4"
           />
 
           <ThemesToggle
@@ -47,7 +47,7 @@ const pathname = Astro.originPathname;
         </div>
       </NavBar>
 
-      <section class="w-full flex flex-col container">
+      <section class="container flex w-full flex-col">
         <slot />
       </section>
     </main>
