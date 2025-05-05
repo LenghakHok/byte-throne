@@ -1,9 +1,11 @@
 ---
+import { ThemesToggle } from "@/components/core/themes-toggle";
 import { ParticlesLayout } from "@/components/layouts/particles-layout";
 import RootLayout from "@/components/layouts/root-layout.astro";
 import { Separator } from "@/components/ui/separator";
 import { TobarSearch } from "@/domains/dashboard/composites/topbar";
 import { NavBar } from "@/domains/dashboard/modules/navbar";
+import { Notification } from "@/domains/dashboard/modules/notification";
 import { ProfileDropdown } from "@/domains/dashboard/modules/profile";
 
 const session = Astro.locals.session!;
@@ -15,10 +17,26 @@ const pathname = Astro.originPathname;
     <main class="size-full flex flex-col items-center z-10">
       <NavBar pathname={pathname} className="container justify-center">
         <Separator className="bg-transparent w-full shrink" />
-        <div class="flex flex-row gap-2">
+        <div class="flex flex-row gap-2 items-center justify-end">
           <TobarSearch
             client:load
             className="text-muted-foreground rounded-full"
+          />
+
+          <Notification
+            className="rounded-full text-muted-foreground"
+            client:load
+          />
+
+          <Separator
+            orientation="vertical"
+            className="data-[orientation=vertical]:h-4 mx-2"
+          />
+
+          <ThemesToggle
+            variant="ghost"
+            className="rounded-full text-muted-foreground"
+            client:load
           />
 
           <ProfileDropdown

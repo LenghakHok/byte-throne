@@ -1,39 +1,7 @@
 ---
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { TobarSearch, Topbar } from "@/domains/dashboard/composites/topbar";
 import DashboardLayout from "@/domains/dashboard/layouts/dashboard-layout.astro";
-import { ProfileDropdown } from "@/domains/dashboard/modules/profile";
 
-const session = Astro.locals.session!;
+// const session = Astro.locals.session!;
 ---
 
-<DashboardLayout>
-  <Topbar>
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem className="font-bold">
-          <BreadcrumbLink href="/teams">Teams</BreadcrumbLink>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
-
-    <div class="flex flex-row gap-4">
-      <TobarSearch client:load />
-      <ProfileDropdown
-        session={session.session}
-        user={session.user}
-        client:load
-      />
-    </div>
-  </Topbar>
-</DashboardLayout>
+<DashboardLayout />

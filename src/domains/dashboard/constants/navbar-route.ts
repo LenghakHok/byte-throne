@@ -1,6 +1,6 @@
 export const mains = [
   {
-    title: "Home",
+    title: "Dashboard",
     utl: "/dashboard",
     description: "",
   },

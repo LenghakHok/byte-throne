@@ -13,7 +13,7 @@ import { observer, useObservable } from "@legendapp/state/react";
 import { SearchIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
 
-export function Topbar({
+export function Header({
   className,
   children,
   ...props

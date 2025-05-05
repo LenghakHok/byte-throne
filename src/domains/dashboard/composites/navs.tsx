@@ -27,7 +27,7 @@ export const Navs = observer((props: Props) => (
           <NavigationMenuItem key={id}>
             <NavigationMenuLink
               className={cn(
-                "rounded-full px-4 py-2 text-muted-foreground transition-all hover:text-foreground data-[active=true]:text-foreground",
+                "rounded-full px-4 py-2 text-muted-foreground transition-all hover:text-foreground focus-visible:bg-transparent focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-background data-[active=true]:font-bold data-[active=true]:text-foreground",
               )}
               data-active={props.pathname.startsWith(value.utl.get())}
               href={value.utl.get()}
