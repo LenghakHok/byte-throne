@@ -5,8 +5,8 @@ export const mains = [
     description: "",
   },
   {
-    title: "Apps",
-    utl: "/apps",
+    title: "Leaderboard",
+    utl: "/leaderboard",
     description: "",
   },
   {

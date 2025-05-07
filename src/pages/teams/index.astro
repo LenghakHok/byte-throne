@@ -1,21 +1,10 @@
 ---
-import {
-  Header,
-  HeaderDescription,
-  HeaderTitle,
-} from "@/domains/dashboard/components/header";
 import DashboardLayout from "@/domains/dashboard/layouts/dashboard-layout.astro";
+import TeamsHeader from "@/domains/teams/templates/teams-header.astro";
 
 // const session = Astro.locals.session!;
 ---
 
 <DashboardLayout>
-  <section class="flex min-h-25 flex-row items-end justify-between">
-    <Header>
-      <HeaderTitle>Teams Management</HeaderTitle>
-      <HeaderDescription>
-        Manage your teams and members in your organization
-      </HeaderDescription>
-    </Header>
-  </section>
+  <TeamsHeader />
 </DashboardLayout>
