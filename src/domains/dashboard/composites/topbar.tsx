@@ -7,7 +7,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { command$ } from "@/domains/stores/command-store";
+import { command$ } from "@/domains/dashboard/stores/command-store";
 import { cn } from "@/lib/cn";
 import { observer, useObservable } from "@legendapp/state/react";
 import { SearchIcon } from "lucide-react";

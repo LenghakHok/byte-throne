@@ -56,18 +56,21 @@ export function ProfileDropdown({
             />
 
             <div className="justify-end-safe flex w-full flex-row items-center gap-2">
-              <DropdownMenuItem className="w-full justify-center rounded-full border shadow-xs">
+              <DropdownMenuItem className="w-full justify-center border shadow-xs">
                 <UserPlusIcon />
                 <span>Add Account</span>
               </DropdownMenuItem>
 
-              <DropdownMenuItem className="w-full justify-center rounded-full border shadow-xs">
+              <DropdownMenuItem className="w-full justify-center border shadow-xs">
                 <LogOutIcon />
                 <span>Sign Out</span>
               </DropdownMenuItem>
             </div>
           </div>
         </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
         {/* Organization */}
         <DropdownMenuGroup className="p-1">
           <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">

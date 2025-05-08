@@ -5,5 +5,12 @@ import {
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  plugins: [organizationClient(), multiSessionClient()],
+  plugins: [
+    organizationClient({
+      teams: {
+        enabled: true,
+      },
+    }),
+    multiSessionClient(),
+  ],
 });
