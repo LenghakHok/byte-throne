@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Muted } from "@/components/ui/typography";
 import { UserAvatar } from "@/domains/dashboard/components/user-avatar";
+import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/cn";
 import {
   ActivityIcon,
@@ -22,13 +23,23 @@ import {
   UserCogIcon,
   UserPlusIcon,
 } from "lucide-react";
-import type { ComponentPropsWithoutRef, ComponentPropsWithRef } from "react";
+import {
+  useCallback,
+  type ComponentPropsWithoutRef,
+  type ComponentPropsWithRef,
+} from "react";
 
 export function ProfileDropdown({
   session,
   user,
   ...props
 }: ComponentPropsWithRef<typeof UserAvatar>) {
+  const handleSignOut = useCallback(() => {
+    authClient.signOut().then((_res) => {
+      location.replace("/auth/sign-in");
+    });
+  }, []);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -61,7 +72,10 @@ export function ProfileDropdown({
                 <span>Add Account</span>
               </DropdownMenuItem>
 
-              <DropdownMenuItem className="w-full justify-center border shadow-xs">
+              <DropdownMenuItem
+                className="w-full justify-center border shadow-xs"
+                onClick={handleSignOut}
+              >
                 <LogOutIcon />
                 <span>Sign Out</span>
               </DropdownMenuItem>
@@ -76,6 +90,7 @@ export function ProfileDropdown({
           <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
             Organization
           </DropdownMenuLabel>
+
           <DropdownMenuItem className="gap-3">
             <PlusIcon />
             <span>Create an Organization</span>

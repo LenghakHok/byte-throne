@@ -16,9 +16,7 @@ const auth = defineMiddleware(async (context, next) => {
   }
 
   // session will already asserted to not null since we have checked
-  if (session !== null) {
-    context.locals.session = session;
-  }
+  context.locals.session = session;
 
   return next();
 });
