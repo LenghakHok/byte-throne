@@ -47,6 +47,8 @@ export const auth = betterAuth({
     }),
     multiSession(),
     organization({
+      allowUserToCreateOrganization: true,
+      organizationLimit: 3,
       teams: {
         enabled: true,
         allowRemovingAllTeams: true,

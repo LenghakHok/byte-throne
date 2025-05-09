@@ -7,6 +7,7 @@ import { TobarSearch } from "@/domains/dashboard/composites/topbar";
 import { NavBar } from "@/domains/dashboard/modules/navbar";
 import { Notification } from "@/domains/dashboard/modules/notification";
 import { ProfileDropdown } from "@/domains/dashboard/modules/profile";
+import { CreateOrgDialog } from "@/domains/org/modules/create-org";
 
 const session = Astro.locals.session!;
 const pathname = Astro.originPathname;
@@ -14,7 +15,7 @@ const pathname = Astro.originPathname;
 
 <RootLayout>
   <ParticlesLayout client:load>
-    <main class="flex size-full flex-col items-center bg-secondary">
+    <main class="flex size-full flex-col items-center">
       <NavBar
         pathname={pathname}
         className="container justify-center pr-2 lg:px-0 2xl:max-w-7xl"
@@ -54,5 +55,6 @@ const pathname = Astro.originPathname;
         <slot />
       </section>
     </main>
+    <CreateOrgDialog client:load />
   </ParticlesLayout>
 </RootLayout>

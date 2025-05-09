@@ -1,3 +1,6 @@
+// UI Components
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -6,16 +9,20 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Muted } from "@/components/ui/typography";
 import { UserAvatar } from "@/domains/dashboard/components/user-avatar";
-import { authClient } from "@/lib/auth-client";
-import { cn } from "@/lib/cn";
+
+// Icons
 import {
   ActivityIcon,
   BadgeHelpIcon,
   BugIcon,
+  BuildingIcon,
   LogOutIcon,
   MessageSquareMoreIcon,
   PlusIcon,
@@ -23,17 +30,165 @@ import {
   UserCogIcon,
   UserPlusIcon,
 } from "lucide-react";
-import {
-  useCallback,
-  type ComponentPropsWithoutRef,
-  type ComponentPropsWithRef,
-} from "react";
 
-export function ProfileDropdown({
+// Utils & Hooks
+import { cn } from "@/lib/cn";
+import { For } from "@/utils/for";
+import { If } from "@/utils/if";
+import { useCallback, type ComponentPropsWithRef } from "react";
+
+// Services & State
+import { createOrgDialog$ } from "@/domains/org/stores/org-store";
+import { authClient } from "@/lib/auth-client";
+import { useSetActiveOrg } from "@/services/org/hooks";
+
+// Types
+interface UserAvatarProps extends ComponentPropsWithRef<typeof UserAvatar> {}
+
+// Component: ProfileDisplay - Shows user avatar and info
+export function ProfileDisplay({
+  className,
   session,
   user,
   ...props
-}: ComponentPropsWithRef<typeof UserAvatar>) {
+}: ComponentPropsWithRef<"div"> & UserAvatarProps) {
+  return (
+    <div
+      className={cn("flex items-center justify-start gap-4", className)}
+      {...props}
+    >
+      <UserAvatar
+        className="size-10"
+        session={session}
+        user={user}
+      />
+
+      <div className="flex w-fit flex-col items-start justify-center">
+        <span className="font-bold">{user.name}</span>
+        <Muted>{user.email}</Muted>
+      </div>
+    </div>
+  );
+}
+
+// Component: OrganizationList - Shows list of organizations in dropdown
+export function OrganizationList(
+  props: ComponentPropsWithRef<typeof DropdownMenuSub>,
+) {
+  const { data: list } = authClient.useListOrganizations();
+  const { data: active } = authClient.useActiveOrganization();
+  const { mutate: setActiveOrg } = useSetActiveOrg();
+
+  if (!list || list.length === 0) {
+    return null;
+  }
+
+  return (
+    <DropdownMenuSub {...props}>
+      <DropdownMenuSubTrigger className="w-full gap-4">
+        <If isTrue={Boolean(active?.id)}>
+          <Avatar>
+            <AvatarFallback className="uppercase">
+              {active?.name.slice(0, 2)}
+            </AvatarFallback>
+          </Avatar>
+          <span>{active?.name}</span>
+        </If>
+
+        <If isTrue={!active?.id}>Choose an Organization</If>
+      </DropdownMenuSubTrigger>
+      <DropdownMenuSubContent className="min-w-52">
+        <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
+          Organizations
+        </DropdownMenuLabel>
+
+        <For
+          each={list}
+          render={(org) => (
+            <DropdownMenuItem
+              className="gap-4"
+              key={org.id}
+              onClick={() => setActiveOrg({ organizationId: org.id })}
+            >
+              <Avatar className="size-8">
+                <AvatarFallback className="uppercase">
+                  {org.name.slice(0, 2)}
+                </AvatarFallback>
+              </Avatar>
+
+              <span>{org.name}</span>
+
+              <If isTrue={org.id === active?.id}>
+                <Badge className="ml-auto w-fit">Active</Badge>
+              </If>
+            </DropdownMenuItem>
+          )}
+        />
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+  );
+}
+
+// Component Sections for ProfileDropdown
+const AccountSection = () => (
+  <>
+    <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
+      Account
+    </DropdownMenuLabel>
+    <DropdownMenuItem className="gap-3">
+      <UserCogIcon />
+      <span>Profile</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem className="gap-3">
+      <ActivityIcon />
+      <span>Activity</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem className="gap-3">
+      <SettingsIcon />
+      <span>Settings</span>
+    </DropdownMenuItem>
+  </>
+);
+
+const OrganizationSection = () => (
+  <>
+    <DropdownMenuItem className="gap-3">
+      <BuildingIcon />
+      <span>Manage Organization</span>
+    </DropdownMenuItem>
+
+    <DropdownMenuItem
+      className="gap-3"
+      onClick={() => createOrgDialog$.isOpen.set(true)}
+    >
+      <PlusIcon />
+      <span>Create an Organization</span>
+    </DropdownMenuItem>
+  </>
+);
+
+const SupportSection = () => (
+  <>
+    <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
+      Support
+    </DropdownMenuLabel>
+    <DropdownMenuItem className="gap-3">
+      <BadgeHelpIcon />
+      <span>Help & Supports</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem className="gap-3">
+      <MessageSquareMoreIcon />
+      <span>FAQs</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem className="gap-3">
+      <BugIcon />
+      <span>Bug Reports</span>
+    </DropdownMenuItem>
+  </>
+);
+
+// Main Component: ProfileDropdown
+export function ProfileDropdown({ session, user, ...props }: UserAvatarProps) {
   const handleSignOut = useCallback(() => {
     authClient.signOut().then((_res) => {
       location.replace("/auth/sign-in");
@@ -54,10 +209,12 @@ export function ProfileDropdown({
           {...props}
         />
       </DropdownMenuTrigger>
+
       <DropdownMenuContent
         align="end"
-        className="min-w-xs"
+        className="-mr-2 min-w-xs"
       >
+        {/* User Profile Section */}
         <DropdownMenuGroup className="p-1">
           <div className="justify-end-safe flex flex-col items-center gap-4 p-2">
             <ProfileDisplay
@@ -85,85 +242,36 @@ export function ProfileDropdown({
 
         <DropdownMenuSeparator />
 
-        {/* Organization */}
+        {/* Organization Selection */}
         <DropdownMenuGroup className="p-1">
           <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
             Organization
           </DropdownMenuLabel>
 
-          <DropdownMenuItem className="gap-3">
-            <PlusIcon />
-            <span>Create an Organization</span>
-          </DropdownMenuItem>
+          <OrganizationList />
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
 
-        {/* Accounts */}
+        {/* Organization Management */}
         <DropdownMenuGroup className="p-1">
-          <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
-            Account
-          </DropdownMenuLabel>
-          <DropdownMenuItem className="gap-3">
-            <UserCogIcon />
-            <span>Manage Account</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="gap-3">
-            <ActivityIcon />
-            <span>Activity</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="gap-3">
-            <SettingsIcon />
-            <span>Settings</span>
-          </DropdownMenuItem>
+          <OrganizationSection />
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
 
-        {/* Accounts */}
+        {/* Account Section */}
         <DropdownMenuGroup className="p-1">
-          <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
-            Support
-          </DropdownMenuLabel>
-          <DropdownMenuItem className="gap-3">
-            <BadgeHelpIcon />
-            <span>Help & Supports</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="gap-3">
-            <MessageSquareMoreIcon />
-            <span>FAQs</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="gap-3">
-            <BugIcon />
-            <span>Bug Reports</span>
-          </DropdownMenuItem>
+          <AccountSection />
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
+        {/* Support Section */}
+        <DropdownMenuGroup className="p-1">
+          <SupportSection />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
-}
-
-export function ProfileDisplay({
-  className,
-  session,
-  user,
-  ...props
-}: ComponentPropsWithRef<"div"> & ComponentPropsWithoutRef<typeof UserAvatar>) {
-  return (
-    <div
-      className={cn("flex items-center justify-start gap-4", className)}
-      {...props}
-    >
-      <UserAvatar
-        className="size-10"
-        session={session}
-        user={user}
-      />
-
-      <div className="flex w-fit flex-col items-start justify-center">
-        <span className="font-bold">{user.name}</span>
-        <Muted>{user.email}</Muted>
-      </div>
-    </div>
   );
 }

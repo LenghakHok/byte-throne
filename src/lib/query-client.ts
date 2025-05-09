@@ -1,17 +1,19 @@
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, type QueryClientConfig } from "@tanstack/react-query";
 
-export class Client {
-  static instance: QueryClient | undefined = undefined;
+export class Client extends QueryClient {
+  static _instance: QueryClient | undefined = undefined;
 
-  constructor() {
+  static getInstance(config?: QueryClientConfig) {
     if (import.meta.env.SSR) {
-      new Client();
+      return new QueryClient(config);
     }
 
-    if (!Client.instance) {
-      Client.instance = new QueryClient();
+    if (!Client._instance) {
+      Client._instance = new QueryClient(config);
     }
+
+    return Client._instance;
   }
 }
 
-export const queryClient = new Client();
+export const queryClient = Client.getInstance();
