@@ -1,0 +1,21 @@
+---
+import {
+  Header,
+  HeaderDescription,
+  HeaderTitle,
+} from "@/domains/dashboard/components/header";
+import { CreateTeamDialog } from "@/domains/teams/modules/create-team";
+---
+
+<section
+  class="flex min-h-25 flex-row flex-wrap items-end justify-between gap-6"
+>
+  <Header>
+    <HeaderTitle>Teams Management</HeaderTitle>
+    <HeaderDescription>
+      Manage your teams and members in your organization
+    </HeaderDescription>
+  </Header>
+
+  <CreateTeamDialog client:load />
+</section>

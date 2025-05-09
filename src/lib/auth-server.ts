@@ -46,6 +46,14 @@ export const auth = betterAuth({
       customPasswordCompromisedMessage: "Please choose a more secure password.",
     }),
     multiSession(),
-    organization(),
+    organization({
+      allowUserToCreateOrganization: true,
+      organizationLimit: 3,
+      teams: {
+        enabled: true,
+        allowRemovingAllTeams: true,
+        maximumTeams: 10,
+      },
+    }),
   ],
 });

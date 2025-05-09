@@ -1,5 +1,4 @@
 import { Particles } from "@/components/magic/particles";
-import { Providers } from "@/components/providers";
 import { resolvedTheme$ } from "@/stores/theme-store";
 import { observable } from "@legendapp/state";
 import { observer, useObserveEffect } from "@legendapp/state/react";
@@ -7,7 +6,7 @@ import type { PropsWithChildren } from "react";
 
 const color$ = observable("#000000");
 
-export const AuthLayout = observer(({ children }: PropsWithChildren) => {
+export const ParticlesLayout = observer(({ children }: PropsWithChildren) => {
   useObserveEffect(
     () => {
       if (resolvedTheme$.get() === "dark") {
@@ -22,7 +21,7 @@ export const AuthLayout = observer(({ children }: PropsWithChildren) => {
   );
 
   return (
-    <Providers>
+    <>
       {children}
       <Particles
         className="absolute inset-0"
@@ -31,6 +30,6 @@ export const AuthLayout = observer(({ children }: PropsWithChildren) => {
         quantity={100}
         refresh={true}
       />
-    </Providers>
+    </>
   );
 });

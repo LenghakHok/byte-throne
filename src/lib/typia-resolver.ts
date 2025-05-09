@@ -38,7 +38,7 @@ function mapError<_TFieldValues extends FieldValues = FieldValues>(
  * @param expected string - the path error from typia (eg. string & Format<"email">)
  * @returns string - the last path of the error (eg. Format("email"))
  */
-const extractConstraint = (expected: string): string => {
+const extractMessageConstraint = (expected: string): string => {
   return expected.split("&")?.at(-1)?.trim() || "_";
 };
 
@@ -81,7 +81,7 @@ export function typiaResolver<
         }
 
         // get the last constrain from "expected" error message
-        const constraint = extractConstraint(error.expected);
+        const constraint = extractMessageConstraint(error.expected);
 
         mapError(errors, path, {
           type: error.path,

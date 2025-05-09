@@ -1,19 +1,9 @@
----
-name: Milestones (Maintainers only)
-about: Track small tasks like features, sub-features, patches, and dependency updates.
-title: "[MILESTONE]:"
-labels: enhancement
-assignees: ''
-
----
-
 ## 🛠️ Task Summary
 
 Briefly describe the task.
 
 > Example: "Update Axios to latest version and adjust request interceptors."
 
----
 
 ## 🧩 Task Type
 
@@ -24,7 +14,6 @@ Briefly describe the task.
 - [ ] Refactor / Cleanup
 - [ ] Other (Specify below)
 
----
 
 ## 📋 Details
 
@@ -32,7 +21,6 @@ More context or specific requirements (if any).
 
 > Example: "Ensure compatibility with new Axios error handling behavior."
 
----
 
 ## 🔗 Dependencies
 
@@ -43,7 +31,6 @@ Is this task blocked by or related to another issue/PR?
 
 > Example: "Blocked by #432 — upgrade to Node 18."
 
----
 
 ## ✅ Acceptance Criteria
 
@@ -52,7 +39,6 @@ Is this task blocked by or related to another issue/PR?
 - [ ] Documentation (if needed)
 - [ ] PR created and linked
 
----
 
 /kind task
 /area developers

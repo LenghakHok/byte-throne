@@ -12,98 +12,27 @@ import {
   Sidebar as SidebarRoot,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { misc, navs } from "@/domains/dashboard/constants/sidebar-route";
 import { For } from "@/utils/for";
-import {
-  BoxIcon,
-  CalendarFoldIcon,
-  CastleIcon,
-  CompassIcon,
-  CrownIcon,
-  HelpCircleIcon,
-  HomeIcon,
-  SettingsIcon,
-  SwordsIcon,
-} from "lucide-react";
-import * as React from "react";
+import React from "react";
 
-// This is sample data
-const navs = {
-  general: [
-    {
-      title: "Home",
-      url: "/dashboard",
-      icon: HomeIcon,
-      isActive: true,
-    },
-  ],
-  fun: [
-    {
-      title: "Explore",
-      url: "/explore",
-      icon: CompassIcon,
-      isActive: false,
-    },
-    {
-      title: "Competition",
-      url: "/competition",
-      icon: SwordsIcon,
-      isActive: false,
-    },
-    {
-      title: "Leaderboard",
-      url: "/leaderboard",
-      icon: CrownIcon,
-      isActive: false,
-    },
-  ],
-  management: [
-    {
-      title: "Events",
-      url: "/events",
-      icon: CalendarFoldIcon,
-      isActive: false,
-    },
-    {
-      title: "Projects",
-      url: "/projects",
-      icon: BoxIcon,
-      isActive: false,
-    },
-    {
-      title: "Teams",
-      url: "/teams",
-      icon: CastleIcon,
-      isActive: false,
-    },
-  ],
-};
+interface Props extends React.ComponentProps<typeof SidebarRoot> {
+  pathname: string;
+}
 
-const misc = [
-  {
-    title: "Help",
-    url: "/help",
-    icon: HelpCircleIcon,
-    isActive: false,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: SettingsIcon,
-    isActive: false,
-  },
-];
-
-export function Sidebar({
-  ...props
-}: React.ComponentProps<typeof SidebarRoot>) {
+export function Sidebar({ pathname, ...props }: Props) {
   // Note: I'm using state to show active item.
   // IRL you should use the url/router.
-  const [activeItem, setActiveItem] = React.useState(navs.general[0]);
+  const [activeItem, setActiveItem] = React.useState(
+    Object.values(navs)
+      .flat()
+      .filter((item) => pathname.startsWith(item.url))[0],
+  );
 
   return (
-    <SidebarProvider>
+    <SidebarProvider className="w-fit">
       <SidebarRoot
-        className="!w-16 overflow-hidden border-r"
+        className="!w-16 overflow-hidden bg-transparent"
         collapsible="none"
         {...props}
       >
@@ -130,7 +59,7 @@ export function Sidebar({
               <React.Fragment key={`sidebar_${nav[0]}`}>
                 <SidebarGroup>
                   <SidebarGroupContent>
-                    <SidebarMenu>
+                    <SidebarMenu className="space-y-2">
                       <For
                         each={nav[1]}
                         render={(item) => (
@@ -138,40 +67,44 @@ export function Sidebar({
                             className="size-fit"
                             key={`${nav[0]}_${item.title}`}
                           >
-                            <SidebarMenuButton
-                              className="size-fit rounded-full p-3 text-muted-foreground [&>svg]:size-4.5"
-                              isActive={activeItem?.title === item.title}
-                              onClick={() => {
-                                setActiveItem(item);
-                              }}
-                              tooltip={{
-                                children: (
-                                  <span className="font-bold">
-                                    {item.title}
-                                  </span>
-                                ),
-                                hidden: false,
-                              }}
+                            <a
+                              className="size-fit rounded-full"
+                              href={item.url}
+                              tabIndex={-1}
                             >
-                              <item.icon />
-                              <span className="sr-only">{item.title}</span>
-                            </SidebarMenuButton>
+                              <SidebarMenuButton
+                                className="size-fit rounded-full border border-transparent p-2 transition-colors data-[active=true]:border-border data-[active=true]:bg-card data-[active=true]:shadow-xs [&>svg]:size-4.5"
+                                isActive={activeItem?.title === item.title}
+                                onClick={() => {
+                                  setActiveItem(item);
+                                }}
+                                tooltip={{
+                                  children: (
+                                    <span className="font-bold">
+                                      {item.title}
+                                    </span>
+                                  ),
+                                  hidden: false,
+                                }}
+                              >
+                                <item.icon />
+                                <span className="sr-only">{item.title}</span>
+                              </SidebarMenuButton>
+                            </a>
                           </SidebarMenuItem>
                         )}
                       />
                     </SidebarMenu>
                   </SidebarGroupContent>
                 </SidebarGroup>
-                <SidebarSeparator className="mx-auto data-[orientation=horizontal]:w-8" />
               </React.Fragment>
             )}
           />
         </SidebarContent>
-        <SidebarFooter className="mx-auto p-0">
-          <SidebarSeparator className="mx-auto data-[orientation=horizontal]:w-8" />
+        <SidebarFooter className="mx-auto mb-6 p-0">
           <SidebarGroup>
             <SidebarGroupContent>
-              <SidebarMenu>
+              <SidebarMenu className="space-y-2">
                 <For
                   each={misc}
                   render={(item) => (
@@ -180,7 +113,7 @@ export function Sidebar({
                       key={`misc_${item.title}`}
                     >
                       <SidebarMenuButton
-                        className="size-fit rounded-full p-3 text-muted-foreground [&>svg]:size-4.5"
+                        className="size-fit rounded-full border border-transparent p-2 transition-colors data-[active=true]:border-border data-[active=true]:bg-card data-[active=true]:shadow-xs [&>svg]:size-4.5"
                         isActive={activeItem?.title === item.title}
                         onClick={() => {
                           setActiveItem(item);
