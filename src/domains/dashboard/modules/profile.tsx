@@ -27,7 +27,9 @@ import {
   MessageSquareMoreIcon,
   PlusIcon,
   SettingsIcon,
+  Undo2Icon,
   UserCogIcon,
+  UserIcon,
   UserPlusIcon,
 } from "lucide-react";
 
@@ -85,7 +87,7 @@ export function OrganizationList(
 
   return (
     <DropdownMenuSub {...props}>
-      <DropdownMenuSubTrigger className="w-full gap-4">
+      <DropdownMenuSubTrigger className="w-full gap-3">
         <If isTrue={Boolean(active?.id)}>
           <Avatar>
             <AvatarFallback className="uppercase">
@@ -95,8 +97,12 @@ export function OrganizationList(
           <span>{active?.name}</span>
         </If>
 
-        <If isTrue={!active?.id}>Choose an Organization</If>
+        <If isTrue={!active?.id}>
+          <UserIcon className="size-4 text-muted-foreground" />
+          <span>Personal Workspace</span>
+        </If>
       </DropdownMenuSubTrigger>
+
       <DropdownMenuSubContent className="min-w-52">
         <DropdownMenuLabel className="text-muted-foreground text-xs uppercase tracking-widest">
           Organizations
@@ -124,6 +130,20 @@ export function OrganizationList(
             </DropdownMenuItem>
           )}
         />
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem
+          className="gap-3"
+          onClick={() =>
+            setActiveOrg({
+              organizationId: null,
+            })
+          }
+        >
+          <Undo2Icon className="size-4 text-muted-foreground" />
+          <span>Switch to Personal</span>
+        </DropdownMenuItem>
       </DropdownMenuSubContent>
     </DropdownMenuSub>
   );
