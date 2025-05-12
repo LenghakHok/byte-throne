@@ -12,20 +12,19 @@ import { InputIcon } from "@/domains/auth/composites/input-icon";
 import { InputPassword } from "@/domains/auth/composites/input-password";
 
 import {
-  signInRequestErrors,
-  validateSignInRequest,
+  signInRequestSchema,
   type SignInRequest,
 } from "@/domains/auth/pipes/sign-in.pipe";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/cn";
-import { typiaResolver } from "@/lib/typia-resolver";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { AtSignIcon } from "lucide-react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 export function SignInForm() {
   const form = useForm<SignInRequest>({
-    resolver: typiaResolver(validateSignInRequest, signInRequestErrors),
+    resolver: valibotResolver(signInRequestSchema),
     defaultValues: {
       email: "",
       password: "",

@@ -1,22 +1,21 @@
-import { createValidate, type IValidation, type tags } from "typia";
+import {
+  maxLength,
+  minLength,
+  object,
+  pipe,
+  string,
+  uuid,
+  type InferInput,
+} from "valibot";
 
-export interface CreateOrgRequest {
-  name: string & tags.MinLength<2> & tags.MaxLength<255>;
-  slug: string & tags.MinLength<2> & tags.MaxLength<255>;
-  userId: string;
-}
+export const createOrgRequestSchema = object({
+  name: pipe(
+    string(),
+    minLength(2, "Name is too short"),
+    maxLength(50, "Name is too long"),
+  ),
+  slug: string(),
+  userId: pipe(string(), uuid()),
+});
 
-export const createOrgErrorMessage = {
-  name: {
-    "MinLength<2>": "The name must be at least 2 characters",
-    "MinLength<3>": "The name must be at most 255 characters",
-  },
-  slug: {
-    "MinLength<2>": "The slug must be at least 2 characters",
-    "MinLength<3>": "The slug must be at most 255 characters",
-  },
-};
-
-export const validateCreateOrg: (
-  input: Partial<CreateOrgRequest>,
-) => IValidation<CreateOrgRequest> = createValidate<CreateOrgRequest>();
+export type CreateOrgRequest = InferInput<typeof createOrgRequestSchema>;

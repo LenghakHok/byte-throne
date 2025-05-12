@@ -1,7 +1,9 @@
-import type { authClient } from "@/lib/auth-client";
-import { createValidate } from "typia";
+import { type } from "arktype";
 
-export interface OAuthRequest
-  extends Pick<Parameters<typeof authClient.signIn.social>[0], "provider"> {}
+// Define the Arktype schema for OAuthRequest
+export const oAuthRequestType = type({
+  provider: type.enumerated("google", "github", "discord"),
+});
 
-export const validateOAuthRequest = createValidate<OAuthRequest>();
+// Create a type alias from the Arktype definition
+export type OAuthRequest = typeof oAuthRequestType.infer;

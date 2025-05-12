@@ -11,19 +11,18 @@ import {
 import { InputIcon } from "@/domains/auth/composites/input-icon";
 import { InputPassword } from "@/domains/auth/composites/input-password";
 import {
-  signUpRequestErrors,
-  validateSignUpRequest,
+  signUpRequestSchema,
   type SignUpRequest,
 } from "@/domains/auth/pipes/sign-up.pipe";
 import { authClient } from "@/lib/auth-client";
-import { typiaResolver } from "@/lib/typia-resolver";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { AtSignIcon, UserIcon } from "lucide-react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 export function SignUpForm() {
   const form = useForm<SignUpRequest>({
-    resolver: typiaResolver(validateSignUpRequest, signUpRequestErrors),
+    resolver: valibotResolver(signUpRequestSchema),
     defaultValues: {
       givenName: "",
       familyName: "",

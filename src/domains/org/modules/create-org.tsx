@@ -17,16 +17,13 @@ import {
   Form as FormProvider,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  createOrgErrorMessage,
-  validateCreateOrg,
-} from "@/domains/org/pipes/create-org.pipe";
+import { createOrgRequestSchema } from "@/domains/org/pipes/create-org.pipe";
 import { createOrgDialog$ } from "@/domains/org/stores/org-store";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/cn";
-import { typiaResolver } from "@/lib/typia-resolver";
 import { useCreateOrg } from "@/services/org/hooks";
 import { If } from "@/utils/if";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { observer, useObservable } from "@legendapp/state/react";
 import { AlertCircleIcon } from "lucide-react";
 import { useCallback, useEffect, type ComponentPropsWithRef } from "react";
@@ -85,7 +82,7 @@ export function CreateOrganizationForm({
   ...props
 }: CreateOrganizationFormProps) {
   const form = useForm({
-    resolver: typiaResolver(validateCreateOrg, createOrgErrorMessage),
+    resolver: valibotResolver(createOrgRequestSchema),
     defaultValues: {
       name: "",
       slug: "",

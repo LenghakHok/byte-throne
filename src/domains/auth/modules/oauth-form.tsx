@@ -3,18 +3,17 @@ import { GithubIcon } from "@/components/icons/github";
 import { GoogleIcon } from "@/components/icons/google";
 import { Button } from "@/components/ui/button";
 import { Form as FormProvider } from "@/components/ui/form";
-import { authClient } from "@/lib/auth-client";
-import { cn } from "@/lib/cn";
-import { typiaResolver } from "@/lib/typia-resolver";
-import { For } from "@/utils/for";
-import { useCallback, type ComponentPropsWithRef } from "react";
-import { useForm } from "react-hook-form";
-
 import {
-  validateOAuthRequest,
+  oAuthRequestType,
   type OAuthRequest,
 } from "@/domains/auth/pipes/oauth.pipe";
+import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/cn";
+import { For } from "@/utils/for";
 import { If } from "@/utils/if";
+import { arktypeResolver } from "@hookform/resolvers/arktype";
+import { useCallback, type ComponentPropsWithRef } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props extends ComponentPropsWithRef<"form"> {
   callbackURL?: string;
@@ -49,7 +48,9 @@ export function OAuthForm({
   ...props
 }: Props) {
   const form = useForm({
-    resolver: typiaResolver<OAuthRequest>(validateOAuthRequest),
+    resolver: arktypeResolver<OAuthRequest, unknown, OAuthRequest>(
+      oAuthRequestType,
+    ),
     defaultValues: {
       provider: "google" as const,
     },
