@@ -1,4 +1,4 @@
-import { Logo } from "@/core/core/logo";
+import { Logo } from "@/core/components/logo";
 import { cn } from "@/core/lib/cn";
 import { Navs } from "@/domains/dashboard/composites/navs";
 import { Topbar } from "@/domains/dashboard/composites/topbar";

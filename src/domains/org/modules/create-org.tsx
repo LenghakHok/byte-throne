@@ -21,7 +21,10 @@ import {
 } from "@/core/ui/form";
 import { Input } from "@/core/ui/input";
 import { If } from "@/core/utils/if";
-import { createOrgRequestSchema } from "@/domains/org/pipes/create-org.pipe";
+import {
+  createOrgRequestSchema,
+  type CreateOrgRequest,
+} from "@/domains/org/pipes/create-org.pipe";
 import { createOrgDialog$ } from "@/domains/org/stores/org-store";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { observer, useObservable } from "@legendapp/state/react";
@@ -82,7 +85,9 @@ export function CreateOrganizationForm({
   ...props
 }: CreateOrganizationFormProps) {
   const form = useForm({
-    resolver: valibotResolver(createOrgRequestSchema),
+    resolver: valibotResolver<CreateOrgRequest, null, CreateOrgRequest>(
+      createOrgRequestSchema,
+    ),
     defaultValues: {
       name: "",
       slug: "",

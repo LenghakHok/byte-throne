@@ -23,8 +23,10 @@ import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 export function SignInForm() {
-  const form = useForm<SignInRequest>({
-    resolver: valibotResolver(signInRequestSchema),
+  const form = useForm({
+    resolver: valibotResolver<SignInRequest, unknown, SignInRequest>(
+      signInRequestSchema,
+    ),
     defaultValues: {
       email: "",
       password: "",

@@ -1,4 +1,5 @@
 // UI Components
+import { UserAvatar } from "@/core/components/user-avatar";
 import { Avatar, AvatarFallback } from "@/core/ui/avatar";
 import { Badge } from "@/core/ui/badge";
 import { buttonVariants } from "@/core/ui/button";
@@ -15,7 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/core/ui/dropdown-menu";
 import { Muted } from "@/core/ui/typography";
-import { UserAvatar } from "@/domains/dashboard/components/user-avatar";
 
 // Icons
 import {

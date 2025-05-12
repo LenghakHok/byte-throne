@@ -1,21 +1,21 @@
 ---
 import {
-  Header,
-  HeaderDescription,
-  HeaderTitle,
-} from "@/domains/dashboard/components/header";
+  DashboardHeader,
+  DashboardHeaderDescription,
+  DashboardHeaderTitle,
+} from "@/core/composites/dashboard-header";
 import { CreateTeamDialog } from "@/domains/teams/modules/create-team";
 ---
 
 <section
-  class="flex min-h-25 flex-row flex-wrap items-end justify-between gap-6"
+  class="min-h-25 flex flex-row flex-wrap items-end justify-between gap-6"
 >
-  <Header>
-    <HeaderTitle>Teams Management</HeaderTitle>
-    <HeaderDescription>
+  <DashboardHeader>
+    <DashboardHeaderTitle>Teams Management</DashboardHeaderTitle>
+    <DashboardHeaderDescription>
       Manage your teams and members in your organization
-    </HeaderDescription>
-  </Header>
+    </DashboardHeaderDescription>
+  </DashboardHeader>
 
   <CreateTeamDialog client:load />
 </section>

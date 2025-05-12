@@ -1,4 +1,4 @@
-import { Logo } from "@/core/core/logo";
+import { Logo } from "@/core/components/logo";
 import {
   SidebarContent,
   SidebarFooter,

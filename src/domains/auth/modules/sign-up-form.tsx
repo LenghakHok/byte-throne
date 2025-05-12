@@ -22,7 +22,9 @@ import { useForm } from "react-hook-form";
 
 export function SignUpForm() {
   const form = useForm<SignUpRequest>({
-    resolver: valibotResolver(signUpRequestSchema),
+    resolver: valibotResolver<SignUpRequest, unknown, SignUpRequest>(
+      signUpRequestSchema,
+    ),
     defaultValues: {
       givenName: "",
       familyName: "",
