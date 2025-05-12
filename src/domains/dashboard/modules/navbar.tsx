@@ -1,7 +1,7 @@
-import { Logo } from "@/components/core/logo";
+import { Logo } from "@/core/core/logo";
+import { cn } from "@/core/lib/cn";
 import { Navs } from "@/domains/dashboard/composites/navs";
 import { Topbar } from "@/domains/dashboard/composites/topbar";
-import { cn } from "@/lib/cn";
 import type { ComponentPropsWithRef } from "react";
 
 interface Props extends ComponentPropsWithRef<typeof Topbar> {

@@ -1,4 +1,4 @@
-import { Logo } from "@/components/core/logo";
+import { Logo } from "@/core/core/logo";
 import {
   SidebarContent,
   SidebarFooter,
@@ -11,9 +11,9 @@ import {
   SidebarProvider,
   Sidebar as SidebarRoot,
   SidebarSeparator,
-} from "@/components/ui/sidebar";
+} from "@/core/ui/sidebar";
+import { For } from "@/core/utils/for";
 import { misc, navs } from "@/domains/dashboard/constants/sidebar-route";
-import { For } from "@/utils/for";
 import React from "react";
 
 interface Props extends React.ComponentProps<typeof SidebarRoot> {

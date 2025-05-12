@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type { authClient } from "@/lib/auth-client";
+import type { authClient } from "@/core/lib/auth-client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
 import type { ComponentPropsWithRef } from "react";
 
 type Props = ComponentPropsWithRef<typeof Avatar> &

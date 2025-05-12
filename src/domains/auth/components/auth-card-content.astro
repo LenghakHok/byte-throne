@@ -1,7 +1,7 @@
 ---
-import { ThemesToggle } from "@/components/composites/themes-toggle";
-import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/cn";
+import { ThemesToggle } from "@/core/composites/themes-toggle";
+import { cn } from "@/core/lib/cn";
+import { Card } from "@/core/ui/card";
 import type { ComponentPropsWithRef } from "react";
 
 interface Props extends ComponentPropsWithRef<typeof Card> {}
@@ -15,7 +15,7 @@ const { className, ...props } = Astro.props;
 >
   <ThemesToggle
     client:load
-    className="absolute top-1 right-1 rounded-lg rounded-tl-none rounded-br-none border-1 border-t-accent! border-r-accent! border-b-border! border-l-border! bg-accent! transition-none"
+    className="border-1 border-t-accent! border-r-accent! border-b-border! border-l-border! bg-accent! absolute right-1 top-1 rounded-lg rounded-br-none rounded-tl-none transition-none"
     variant="outline"
   />
   <slot />

@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+import { cn } from "@/core/lib/cn";
+import { Button } from "@/core/ui/button";
 import {
   CommandDialog,
   CommandEmpty,
@@ -6,9 +7,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/core/ui/command";
 import { command$ } from "@/domains/dashboard/stores/command-store";
-import { cn } from "@/lib/cn";
 import { observer, useObservable } from "@legendapp/state/react";
 import { SearchIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";

@@ -1,7 +1,7 @@
 // UI Components
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/core/ui/avatar";
+import { Badge } from "@/core/ui/badge";
+import { buttonVariants } from "@/core/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,8 +13,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Muted } from "@/components/ui/typography";
+} from "@/core/ui/dropdown-menu";
+import { Muted } from "@/core/ui/typography";
 import { UserAvatar } from "@/domains/dashboard/components/user-avatar";
 
 // Icons
@@ -34,15 +34,15 @@ import {
 } from "lucide-react";
 
 // Utils & Hooks
-import { cn } from "@/lib/cn";
-import { For } from "@/utils/for";
-import { If } from "@/utils/if";
+import { cn } from "@/core/lib/cn";
+import { For } from "@/core/utils/for";
+import { If } from "@/core/utils/if";
 import { useCallback, type ComponentPropsWithRef } from "react";
 
 // Services & State
+import { authClient } from "@/core/lib/auth-client";
+import { useSetActiveOrg } from "@/core/services/org/hooks";
 import { createOrgDialog$ } from "@/domains/org/stores/org-store";
-import { authClient } from "@/lib/auth-client";
-import { useSetActiveOrg } from "@/services/org/hooks";
 
 // Types
 interface UserAvatarProps extends ComponentPropsWithRef<typeof UserAvatar> {}

@@ -1,16 +1,16 @@
-import { DiscordIcon } from "@/components/icons/discord";
-import { GithubIcon } from "@/components/icons/github";
-import { GoogleIcon } from "@/components/icons/google";
-import { Button } from "@/components/ui/button";
-import { Form as FormProvider } from "@/components/ui/form";
+import { DiscordIcon } from "@/core/icons/discord";
+import { GithubIcon } from "@/core/icons/github";
+import { GoogleIcon } from "@/core/icons/google";
+import { authClient } from "@/core/lib/auth-client";
+import { cn } from "@/core/lib/cn";
+import { Button } from "@/core/ui/button";
+import { Form as FormProvider } from "@/core/ui/form";
+import { For } from "@/core/utils/for";
+import { If } from "@/core/utils/if";
 import {
   oAuthRequestType,
   type OAuthRequest,
 } from "@/domains/auth/pipes/oauth.pipe";
-import { authClient } from "@/lib/auth-client";
-import { cn } from "@/lib/cn";
-import { For } from "@/utils/for";
-import { If } from "@/utils/if";
 import { arktypeResolver } from "@hookform/resolvers/arktype";
 import { useCallback, type ComponentPropsWithRef } from "react";
 import { useForm } from "react-hook-form";

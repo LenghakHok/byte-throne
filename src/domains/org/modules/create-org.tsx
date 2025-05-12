@@ -1,12 +1,15 @@
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
+import { authClient } from "@/core/lib/auth-client";
+import { cn } from "@/core/lib/cn";
+import { useCreateOrg } from "@/core/services/org/hooks";
+import { Alert, AlertDescription } from "@/core/ui/alert";
+import { Button } from "@/core/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/core/ui/dialog";
 import {
   FormControl,
   FormDescription,
@@ -15,14 +18,11 @@ import {
   FormLabel,
   FormMessage,
   Form as FormProvider,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/core/ui/form";
+import { Input } from "@/core/ui/input";
+import { If } from "@/core/utils/if";
 import { createOrgRequestSchema } from "@/domains/org/pipes/create-org.pipe";
 import { createOrgDialog$ } from "@/domains/org/stores/org-store";
-import { authClient } from "@/lib/auth-client";
-import { cn } from "@/lib/cn";
-import { useCreateOrg } from "@/services/org/hooks";
-import { If } from "@/utils/if";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { observer, useObservable } from "@legendapp/state/react";
 import { AlertCircleIcon } from "lucide-react";

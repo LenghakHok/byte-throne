@@ -1,9 +1,6 @@
-import { buttonVariants } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/cn";
+import { cn } from "@/core/lib/cn";
+import { buttonVariants } from "@/core/ui/button";
+import { DropdownMenu, DropdownMenuTrigger } from "@/core/ui/dropdown-menu";
 import { BellIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
 

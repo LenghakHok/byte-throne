@@ -1,8 +1,8 @@
 ---
-import { ThemesToggle } from "@/components/composites/themes-toggle";
-import { ParticlesLayout } from "@/components/layouts/particles-layout";
-import RootLayout from "@/components/layouts/root-layout.astro";
-import { Separator } from "@/components/ui/separator";
+import { ThemesToggle } from "@/core/composites/themes-toggle";
+import { ParticlesLayout } from "@/core/layouts/particles-layout";
+import RootLayout from "@/core/layouts/root-layout.astro";
+import { Separator } from "@/core/ui/separator";
 import { TobarSearch } from "@/domains/dashboard/composites/topbar";
 import { NavBar } from "@/domains/dashboard/modules/navbar";
 import { Notification } from "@/domains/dashboard/modules/notification";
@@ -24,11 +24,11 @@ const pathname = Astro.originPathname;
         <div class="flex flex-row items-center justify-end gap-2">
           <TobarSearch
             client:load
-            className="rounded-full text-muted-foreground"
+            className="text-muted-foreground rounded-full"
           />
 
           <Notification
-            className="rounded-full text-muted-foreground"
+            className="text-muted-foreground rounded-full"
             client:load
           />
 
@@ -39,7 +39,7 @@ const pathname = Astro.originPathname;
 
           <ThemesToggle
             variant="ghost"
-            className="rounded-full text-muted-foreground"
+            className="text-muted-foreground rounded-full"
             client:load
           />
 

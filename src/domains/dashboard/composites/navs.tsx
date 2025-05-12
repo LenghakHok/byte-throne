@@ -1,11 +1,11 @@
+import { cn } from "@/core/lib/cn";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu";
+} from "@/core/ui/navigation-menu";
 import { mains } from "@/domains/dashboard/constants/navbar-route";
-import { cn } from "@/lib/cn";
 import { observable } from "@legendapp/state";
 import { For, observer } from "@legendapp/state/react";
 import type { ComponentPropsWithRef } from "react";

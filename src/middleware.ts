@@ -1,4 +1,4 @@
-import { auth as betterAuth } from "@/lib/auth-server";
+import { auth as betterAuth } from "@/core/lib/auth-server";
 import { defineMiddleware, sequence } from "astro:middleware";
 
 const forbidden = ["/dashboard", "/teams"];
