@@ -12,6 +12,7 @@ import { command$ } from "@/domains/dashboard/stores/command-store";
 import { observer, useObservable } from "@legendapp/state/react";
 import { SearchIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
+import React from "react";
 
 export function Topbar({
   className,
@@ -34,6 +35,18 @@ export function Topbar({
 export const TobarSearch = observer(
   (props: ComponentPropsWithRef<typeof Button>) => {
     const open$ = useObservable(command$);
+
+    React.useEffect(() => {
+      const down = (e: KeyboardEvent) => {
+        if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          open$.set((open) => !open);
+        }
+      };
+
+      document.addEventListener("keydown", down);
+      return () => document.removeEventListener("keydown", down);
+    }, [open$]);
 
     return (
       <>

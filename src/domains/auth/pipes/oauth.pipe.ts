@@ -1,9 +1,9 @@
-import { type } from "arktype";
+import { object, picklist, type InferInput } from "valibot";
 
 // Define the Arktype schema for OAuthRequest
-export const oAuthRequestType = type({
-  provider: type.enumerated("google", "github", "discord"),
+export const oAuthRequestType = object({
+  provider: picklist(["google", "github", "discord"]),
 });
 
 // Create a type alias from the Arktype definition
-export type OAuthRequest = typeof oAuthRequestType.infer;
+export type OAuthRequest = InferInput<typeof oAuthRequestType>;

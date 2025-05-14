@@ -11,7 +11,7 @@ import {
   oAuthRequestType,
   type OAuthRequest,
 } from "@/domains/auth/pipes/oauth.pipe";
-import { arktypeResolver } from "@hookform/resolvers/arktype";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useCallback, type ComponentPropsWithRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -48,7 +48,7 @@ export function OAuthForm({
   ...props
 }: Props) {
   const form = useForm({
-    resolver: arktypeResolver<OAuthRequest, unknown, OAuthRequest>(
+    resolver: valibotResolver<OAuthRequest, unknown, OAuthRequest>(
       oAuthRequestType,
     ),
     defaultValues: {

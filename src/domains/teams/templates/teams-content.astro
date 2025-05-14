@@ -1,13 +1,14 @@
 ---
-
+import { TeamsControl } from "@/domains/teams/modules/teams-control";
+import { TeamsNavs } from "@/domains/teams/modules/teams-navs";
 ---
 
-<section class="flex w-full flex-col">
-  <!-- Filters, Sorts, Search, Views, Groups. -->
-  <div class="flex flex-row items-center justify-between">
-    <!-- Search & Filters -->
-
-    <!-- Sorts, Views & Groups -->
+<section class="mt-6 flex w-full flex-col gap-6">
+  <div class="relative flex flex-col gap-6">
+    <!-- Filters, -->
+    <TeamsNavs client:load className="w-full" />
+    <!--  Sorts, Search, Views, Groups. -->
+    <TeamsControl client:load />
   </div>
 
   <!-- Tables Container - Card -->

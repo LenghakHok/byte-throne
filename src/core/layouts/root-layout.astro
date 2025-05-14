@@ -2,7 +2,8 @@
 import "@/core/styles/globals.css";
 
 import { ClientRouter } from "astro:transitions";
-import { Providers } from "@/core/providers";
+import { NuqsAdapter } from "nuqs/adapters/react";
+import { ThemeProvider } from "@/core/providers/theme-provider";
 import { Favicon } from "@/core/components/favicon";
 import { Toaster } from "@/core/ui/sonner";
 import { PUBLIC_APP_NAME } from "astro:env/client";
@@ -58,9 +59,11 @@ import { PUBLIC_APP_NAME } from "astro:env/client";
   <body
     class="relative flex h-dvh w-dvw flex-col items-center justify-center overflow-hidden"
   >
-    <Providers client:only="react">
-      <slot />
-      <Toaster client:idle />
-    </Providers>
+    <NuqsAdapter client:load>
+      <ThemeProvider client:only="react">
+        <slot />
+        <Toaster client:idle />
+      </ThemeProvider>
+    </NuqsAdapter>
   </body>
 </html>

@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/core/ui/dropdown-menu";
 import { observer } from "@legendapp/state/react";
-import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { MonitorIcon, MoonStarIcon, SunIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
 
 export const ThemesToggle = observer(
@@ -21,7 +21,7 @@ export const ThemesToggle = observer(
             {...props}
           >
             <SunIcon className="dark:-rotate-90 rotate-0 scale-100 transition-all dark:scale-0" />
-            <MoonIcon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <MoonStarIcon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
           </Button>
         </DropdownMenuTrigger>
@@ -31,7 +31,7 @@ export const ThemesToggle = observer(
             <span>Light</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => theme$.set("dark")}>
-            <MoonIcon />
+            <MoonStarIcon />
             <span>Dark</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => theme$.set("system")}>
