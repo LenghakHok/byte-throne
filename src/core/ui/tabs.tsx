@@ -1,5 +1,5 @@
 import { Tabs as TabsPrimitive } from "@base-ui-components/react/tabs";
-import * as React from "react";
+import React from "react";
 
 import { cn } from "@/core/lib/cn";
 

@@ -1,0 +1,15 @@
+---
+import { TeamsControl } from "@/domains/teams/modules/teams-control";
+import { TeamsNavs } from "@/domains/teams/modules/teams-navs";
+---
+
+<section class="flex w-full flex-col gap-4">
+  <!-- Filters, -->
+  <TeamsNavs client:load className="z-10" />
+  <!--  Sorts, Search, Views, Groups. -->
+  <TeamsControl client:load />
+
+  <!-- Tables Container - Card -->
+
+  <!--  -->
+</section>

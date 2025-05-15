@@ -25,15 +25,15 @@ import { Input } from "@/core/ui/input";
 import { Separator } from "@/core/ui/separator";
 import { Small } from "@/core/ui/typography";
 import { If } from "@/core/utils/if";
+import { createTeamRequest } from "@/domains/teams/pipes/teams-create-pipe";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { AlertCircleIcon, LoaderCircleIcon, PlusIcon } from "lucide-react";
 import { useEffect, useRef, type ComponentPropsWithRef } from "react";
 import { useForm } from "react-hook-form";
-import { createTeamRequest } from "../pipes/create-team-pipe";
 
 interface Props extends ComponentPropsWithRef<typeof Dialog> {}
 
-export function CreateTeamDialog({ ...props }: Props) {
+export function TeamsCreateDialog({ ...props }: Props) {
   return (
     <Dialog {...props}>
       <DialogTrigger asChild={true}>
@@ -52,13 +52,13 @@ export function CreateTeamDialog({ ...props }: Props) {
 
         <Separator className="border border-dashed bg-transparent" />
 
-        <CreateTeamForm />
+        <TeamsCreateForm />
       </DialogContent>
     </Dialog>
   );
 }
 
-export function CreateTeamForm({
+export function TeamsCreateForm({
   className,
   ...props
 }: ComponentPropsWithRef<"form">) {

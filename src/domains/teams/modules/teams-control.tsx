@@ -25,7 +25,7 @@ export const TeamsControl = ({ className, ...props }: Props) => {
       <div className="flex w-full max-w-fit flex-row items-center gap-4">
         <div className="relative">
           <Input
-            className="peer ps-9"
+            className="peer bg-background ps-9"
             placeholder="Search"
             type="text"
           />
@@ -48,9 +48,6 @@ export const TeamsControl = ({ className, ...props }: Props) => {
             </Button>
           </DropdownMenuTrigger>
         </DropdownMenu>
-      </div>
-
-      <div className="flex w-full max-w-fit flex-row items-center gap-4">
         <Button
           className="[&_svg]:text-muted-foreground"
           variant="outline"
@@ -75,6 +72,8 @@ export const TeamsControl = ({ className, ...props }: Props) => {
           <span>Columns</span>
         </Button>
       </div>
+
+      <div className="flex w-full max-w-fit flex-row items-center gap-4"></div>
     </div>
   );
 };

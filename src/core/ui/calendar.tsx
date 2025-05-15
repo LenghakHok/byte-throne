@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/core/lib/cn";
 import { Button, buttonVariants } from "@/core/ui/button";
 import { differenceInCalendarDays } from "date-fns";

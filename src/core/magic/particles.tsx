@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/core/lib/cn";
 import React, {
   type ComponentPropsWithoutRef,

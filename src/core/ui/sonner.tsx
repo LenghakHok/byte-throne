@@ -1,5 +1,3 @@
-"use client";
-
 import { theme$ } from "@/core/stores/theme-store";
 import { observer } from "@legendapp/state/react";
 import type React from "react";

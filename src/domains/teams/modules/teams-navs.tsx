@@ -5,10 +5,10 @@ export const TeamsNavs = (props: ComponentPropsWithRef<typeof Tabs>) => {
   return (
     <Tabs
       defaultValue="members"
-      variant="underline"
+      variant="default"
       {...props}
     >
-      <TabsList className="data-[orientation=horizontal]:justify-start">
+      <TabsList className="w-fit border data-[orientation=horizontal]:justify-start">
         <TabsTrigger
           className="w-fit data-[orientation=horizontal]:px-4"
           value="members"
