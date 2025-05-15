@@ -4,6 +4,7 @@ import type { CreateOrgRequest } from "@/domains/org/pipes/create-org.pipe";
 import { useMutation } from "@tanstack/react-query";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { toast } from "sonner";
+import { mutationKeys } from "./keys";
 
 export function useCreateOrg<
   TFieldValues extends FieldValues = FieldValues,
@@ -12,9 +13,9 @@ export function useCreateOrg<
 >(form?: UseFormReturn<TFieldValues, TContext, TTransformedValues>) {
   return useMutation(
     {
-      mutationKey: ["auth", "organization", "create"],
+      mutationKey: mutationKeys.create(),
       mutationFn: async (v: CreateOrgRequest) => {
-        await authClient.organization.create({
+        return await authClient.organization.create({
           name: v.name,
           slug: v.slug,
           fetchOptions: {
@@ -28,24 +29,22 @@ export function useCreateOrg<
         });
       },
       onSuccess: () => {
-        toast.message("An organization is successfully created.");
+        toast.success("An organization is successfully created.");
       },
     },
     queryClient,
   );
 }
 
-export function useSetActiveOrg<
-  TFieldValues extends FieldValues = FieldValues,
-  TContext = any,
-  TTransformedValues = TFieldValues,
->(_form?: UseFormReturn<TFieldValues, TContext, TTransformedValues>) {
+export function useSetActiveOrg() {
   return useMutation(
     {
       mutationKey: ["auth", "organization", "setActive"],
-      mutationFn: async (v: { organizationId: any }) => {
-        await authClient.organization.setActive({
-          organizationId: v.organizationId,
+      mutationFn: async (
+        v: Parameters<typeof authClient.organization.setActive>[0],
+      ) => {
+        return await authClient.organization.setActive({
+          organizationId: v?.organizationId,
         });
       },
     },

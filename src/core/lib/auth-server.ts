@@ -51,7 +51,7 @@ export const auth = betterAuth({
       organizationLimit: 3,
       teams: {
         enabled: true,
-        allowRemovingAllTeams: true,
+        allowRemovingAllTeams: false,
         maximumTeams: 10,
       },
     }),

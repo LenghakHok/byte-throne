@@ -2,14 +2,12 @@ import { cn } from "@/core/lib/cn";
 import { Button } from "@/core/ui/button";
 import { DropdownMenu, DropdownMenuTrigger } from "@/core/ui/dropdown-menu";
 import { Input } from "@/core/ui/input";
-import { Separator } from "@/core/ui/separator";
 import {
   ArrowUpDownIcon,
   ColumnsSettingsIcon,
   LayoutListIcon,
   ListFilterIcon,
   SearchIcon,
-  UserPlus,
 } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
 
@@ -75,16 +73,6 @@ export const TeamsControl = ({ className, ...props }: Props) => {
         >
           <ColumnsSettingsIcon />
           <span>Columns</span>
-        </Button>
-
-        <Separator
-          className="data-[orientation=vertical]:h-4"
-          orientation="vertical"
-        />
-
-        <Button variant="default">
-          <UserPlus />
-          <span>Invite Members</span>
         </Button>
       </div>
     </div>

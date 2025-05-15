@@ -41,7 +41,7 @@ import { useCallback, type ComponentPropsWithRef } from "react";
 
 // Services & State
 import { authClient } from "@/core/lib/auth-client";
-import { useSetActiveOrg } from "@/core/services/org/hooks";
+import { useSetActiveOrg } from "@/core/services/orgs/hooks";
 import { createOrgDialog$ } from "@/domains/org/stores/org-store";
 
 // Types

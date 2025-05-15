@@ -1,6 +1,6 @@
 import { authClient } from "@/core/lib/auth-client";
 import { cn } from "@/core/lib/cn";
-import { useCreateOrg } from "@/core/services/org/hooks";
+import { useCreateOrg } from "@/core/services/orgs/hooks";
 import { Alert, AlertDescription } from "@/core/ui/alert";
 import { Button } from "@/core/ui/button";
 import {
@@ -20,6 +20,7 @@ import {
   Form as FormProvider,
 } from "@/core/ui/form";
 import { Input } from "@/core/ui/input";
+import { Separator } from "@/core/ui/separator";
 import { If } from "@/core/utils/if";
 import {
   createOrgRequestSchema,
@@ -69,6 +70,8 @@ export function CreateOrgDialogContent({
           Fill in the fields below to create new organization
         </DialogDescription>
       </DialogHeader>
+
+      <Separator className="border border-dashed bg-transparent" />
 
       <CreateOrganizationForm user={session?.user} />
     </DialogContent>
@@ -134,7 +137,7 @@ export function CreateOrganizationForm({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Organization Name</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Acme ltd."
@@ -164,7 +167,7 @@ export function CreateOrganizationForm({
           name="slug"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Slug</FormLabel>
+              <FormLabel>Organization Slug</FormLabel>
               <FormControl>
                 <Input
                   placeholder="acme-ltd"
@@ -181,6 +184,8 @@ export function CreateOrganizationForm({
             </FormItem>
           )}
         />
+
+        <Separator className="border border-dashed bg-transparent" />
 
         <Button type="submit">Create Organization</Button>
       </form>

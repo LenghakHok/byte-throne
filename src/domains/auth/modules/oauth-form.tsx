@@ -8,7 +8,7 @@ import { Form as FormProvider } from "@/core/ui/form";
 import { For } from "@/core/utils/for";
 import { If } from "@/core/utils/if";
 import {
-  oAuthRequestType,
+  oAuthRequestSchema,
   type OAuthRequest,
 } from "@/domains/auth/pipes/oauth.pipe";
 import { valibotResolver } from "@hookform/resolvers/valibot";
@@ -49,7 +49,7 @@ export function OAuthForm({
 }: Props) {
   const form = useForm({
     resolver: valibotResolver<OAuthRequest, unknown, OAuthRequest>(
-      oAuthRequestType,
+      oAuthRequestSchema,
     ),
     defaultValues: {
       provider: "google" as const,
