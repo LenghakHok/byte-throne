@@ -1,16 +1,18 @@
 import { authClient } from "@/core/lib/auth-client";
-import { queryClient } from "@/core/lib/query-client";
-import type { CreateOrgRequest } from "@/domains/org/pipes/create-org.pipe";
+import { $queryClient } from "@/core/lib/query-client";
+import { useStore } from "@nanostores/react";
 import { useMutation } from "@tanstack/react-query";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { toast } from "sonner";
 import { mutationKeys } from "./keys";
+import type { CreateOrgRequest } from "./pipes";
 
 export function useCreateOrg<
   TFieldValues extends FieldValues = FieldValues,
   TContext = any,
   TTransformedValues = TFieldValues,
 >(form?: UseFormReturn<TFieldValues, TContext, TTransformedValues>) {
+  const queryClient = useStore($queryClient);
   return useMutation(
     {
       mutationKey: mutationKeys.create(),
@@ -37,6 +39,8 @@ export function useCreateOrg<
 }
 
 export function useSetActiveOrg() {
+  const queryClient = useStore($queryClient);
+
   return useMutation(
     {
       mutationKey: ["auth", "organization", "setActive"],

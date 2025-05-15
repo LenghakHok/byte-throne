@@ -15,7 +15,7 @@ const pathname = Astro.originPathname;
 
 <RootLayout>
   <ParticlesLayout client:load>
-    <main class="flex size-full flex-col items-center">
+    <main class="flex size-full flex-col items-center overflow-y-auto">
       <NavBar
         pathname={pathname}
         className="container justify-center pr-2 lg:px-0 2xl:max-w-7xl"
@@ -57,6 +57,6 @@ const pathname = Astro.originPathname;
         <slot />
       </section>
     </main>
-    <CreateOrgDialog client:load />
+    <CreateOrgDialog user={session.user} client:load />
   </ParticlesLayout>
 </RootLayout>

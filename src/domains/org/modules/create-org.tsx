@@ -1,6 +1,10 @@
-import { authClient } from "@/core/lib/auth-client";
+import type { authClient } from "@/core/lib/auth-client";
 import { cn } from "@/core/lib/cn";
 import { useCreateOrg } from "@/core/services/orgs/hooks";
+import {
+  createOrgRequestSchema,
+  type CreateOrgRequest,
+} from "@/core/services/orgs/pipes";
 import { Alert, AlertDescription } from "@/core/ui/alert";
 import { Button } from "@/core/ui/button";
 import {
@@ -22,10 +26,6 @@ import {
 import { Input } from "@/core/ui/input";
 import { Separator } from "@/core/ui/separator";
 import { If } from "@/core/utils/if";
-import {
-  createOrgRequestSchema,
-  type CreateOrgRequest,
-} from "@/domains/org/pipes/create-org.pipe";
 import { createOrgDialog$ } from "@/domains/org/stores/org-store";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { observer, useObservable } from "@legendapp/state/react";
@@ -34,31 +34,34 @@ import { useCallback, useEffect, type ComponentPropsWithRef } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
 
-export const CreateOrgDialog = observer(
-  (props: ComponentPropsWithRef<typeof Dialog>) => {
-    const dialog$ = useObservable(createOrgDialog$.isOpen);
+interface Props extends ComponentPropsWithRef<typeof Dialog> {
+  user: typeof authClient.$Infer.Session.user;
+}
 
-    return (
-      <Dialog
-        onOpenChange={(v) => dialog$.set(v)}
-        open={dialog$.get()}
-        {...props}
-      >
-        <CreateOrgDialogContent />
-      </Dialog>
-    );
-  },
-);
+export const CreateOrgDialog = observer(({ user, ...props }: Props) => {
+  const dialog$ = useObservable(createOrgDialog$.isOpen);
+
+  return (
+    <Dialog
+      onOpenChange={(v) => dialog$.set(v)}
+      open={dialog$.get()}
+      {...props}
+    >
+      <CreateOrgDialogContent user={user} />
+    </Dialog>
+  );
+});
 
 interface CreateOrgDialogContentProps
-  extends ComponentPropsWithRef<typeof DialogContent> {}
+  extends ComponentPropsWithRef<typeof DialogContent> {
+  user: typeof authClient.$Infer.Session.user;
+}
 
 export function CreateOrgDialogContent({
   className,
+  user,
   ...props
 }: CreateOrgDialogContentProps) {
-  const { data: session } = authClient.useSession();
-
   return (
     <DialogContent
       className={cn(className)}
@@ -73,7 +76,7 @@ export function CreateOrgDialogContent({
 
       <Separator className="border border-dashed bg-transparent" />
 
-      <CreateOrganizationForm user={session?.user} />
+      <CreateOrganizationForm user={user} />
     </DialogContent>
   );
 }

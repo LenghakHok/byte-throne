@@ -1,5 +1,5 @@
-import { Particles } from "@/core/magic/particles";
 import { resolvedTheme$ } from "@/core/stores/theme-store";
+import { Particles } from "@/core/ui/particles";
 import { observable } from "@legendapp/state";
 import { observer, useObserveEffect } from "@legendapp/state/react";
 import type { PropsWithChildren } from "react";

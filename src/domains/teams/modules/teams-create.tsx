@@ -1,6 +1,10 @@
 import { authClient } from "@/core/lib/auth-client";
 import { cn } from "@/core/lib/cn";
 import { useCreateTeam } from "@/core/services/teams/hooks";
+import {
+  createTeamRequest,
+  type CreateTeamRequest,
+} from "@/core/services/teams/pipes";
 import { Alert, AlertDescription } from "@/core/ui/alert";
 import { Avatar, AvatarFallback } from "@/core/ui/avatar";
 import { Button } from "@/core/ui/button";
@@ -25,7 +29,6 @@ import { Input } from "@/core/ui/input";
 import { Separator } from "@/core/ui/separator";
 import { Small } from "@/core/ui/typography";
 import { If } from "@/core/utils/if";
-import { createTeamRequest } from "@/domains/teams/pipes/teams-create-pipe";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { AlertCircleIcon, LoaderCircleIcon, PlusIcon } from "lucide-react";
 import { useEffect, useRef, type ComponentPropsWithRef } from "react";
@@ -67,7 +70,9 @@ export function TeamsCreateForm({
   const { mutate: createTeam, isSuccess, isPending } = useCreateTeam();
 
   const form = useForm({
-    resolver: valibotResolver(createTeamRequest),
+    resolver: valibotResolver<CreateTeamRequest, null, CreateTeamRequest>(
+      createTeamRequest,
+    ),
     defaultValues: {
       name: "",
     },
@@ -85,7 +90,7 @@ export function TeamsCreateForm({
     <Form {...form}>
       <form
         className={cn("flex w-full flex-col gap-4", className)}
-        onSubmit={form.handleSubmit((v) => createTeam(v))}
+        onSubmit={form.handleSubmit((v: CreateTeamRequest) => createTeam(v))}
         {...props}
       >
         <If isTrue={Boolean(form.formState.errors.root?.message)}>

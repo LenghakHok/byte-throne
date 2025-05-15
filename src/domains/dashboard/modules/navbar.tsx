@@ -11,10 +11,10 @@ interface Props extends ComponentPropsWithRef<typeof Topbar> {
 export function NavBar({ className, children, pathname, ...props }: Props) {
   return (
     <Topbar
-      className={cn("h-16 w-full justify-start md:gap-6", className)}
+      className={cn("h-18 w-full justify-start md:gap-6", className)}
       {...props}
     >
-      <Logo className="[&_svg:not([class*='size-'])]:size-8" />
+      <Logo className="p-2 [&_svg:not([class*='size-'])]:size-8" />
       <Navs
         className="hidden lg:flex"
         pathname={pathname}

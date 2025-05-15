@@ -1,0 +1,25 @@
+---
+import { $queryClient } from "@/core/lib/query-client";
+import { loadListTeams } from "@/core/services/teams/loader";
+import { TeamsTable } from "@/domains/teams/modules/teams-table";
+import { dehydrate } from "@tanstack/react-query";
+
+const { session } = Astro.locals;
+
+const queryclient = $queryClient.get();
+
+await loadListTeams(queryclient, {
+  headers: Astro.request.headers,
+  query: { organizationId: session?.session?.activeOrganizationId ?? "" },
+});
+
+const hydratedState = dehydrate(queryclient);
+---
+
+<section class="flex flex-col gap-4">
+  <TeamsTable
+    state={hydratedState}
+    organizationId={session?.session.activeOrganizationId ?? ""}
+    client:load
+  />
+</section>
