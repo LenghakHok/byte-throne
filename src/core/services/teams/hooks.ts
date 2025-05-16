@@ -1,31 +1,70 @@
-import type { authClient } from "@/core/lib/auth-client";
+import { authClient } from "@/core/lib/auth-client";
 import { $queryClient } from "@/core/lib/query-client";
 import { useStore } from "@nanostores/react";
-import {
-  useMutation,
-  useQuery,
-  type UseQueryOptions,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import type { UseFormReturn } from "react-hook-form";
-import { createTeamOption, listTeamsOption } from "./options";
+import { toast } from "sonner";
+import { mutationKeys, queryKeys } from "./keys";
+import type { CreateTeamRequest } from "./pipes";
 
 export function useCreateTeam(form?: UseFormReturn) {
   const queryClient = useStore($queryClient);
-  return useMutation(createTeamOption(form), queryClient);
+  return useMutation(
+    {
+      mutationKey: mutationKeys.create(),
+      mutationFn: async (v: CreateTeamRequest) => {
+        return await authClient.organization.createTeam({
+          name: v.name,
+          fetchOptions: {
+            throw: true,
+            onError: (e) => {
+              form?.setError("root", {
+                message: e.error.message,
+              });
+            },
+          },
+        });
+      },
+      onSuccess: (data: typeof authClient.$Infer.Team) => {
+        toast.success(`${data.name} team is successfully created.`);
+      },
+    },
+    queryClient,
+  );
 }
 
 export function useListTeams(
-  options?: UseQueryOptions,
   ...args: Parameters<typeof authClient.organization.listTeams>
 ) {
   const queryClient = useStore($queryClient);
-  return useQuery(listTeamsOption(options, ...args), queryClient);
+  const [params] = args;
+  return useQuery(
+    {
+      queryKey: queryKeys.list({
+        organizationId: params?.query?.organizationId,
+      }),
+      queryFn: async () => {
+        return await authClient.organization.listTeams(...args);
+      },
+    },
+    queryClient,
+  );
 }
 
 export function useSuspenseListTeams(
-  options?: UseQueryOptions,
   ...args: Parameters<typeof authClient.organization.listTeams>
 ) {
   const queryClient = useStore($queryClient);
-  return useQuery(listTeamsOption(options, ...args), queryClient);
+  const [params] = args;
+  return useSuspenseQuery(
+    {
+      queryKey: queryKeys.list({
+        organizationId: params?.query?.organizationId,
+      }),
+      queryFn: async () => {
+        return await authClient.organization.listTeams(...args);
+      },
+    },
+    queryClient,
+  );
 }

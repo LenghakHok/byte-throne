@@ -8,7 +8,7 @@ const { session } = Astro.locals;
 
 const queryclient = $queryClient.get();
 
-await loadListTeams(queryclient, {
+loadListTeams(queryclient, {
   headers: Astro.request.headers,
   query: { organizationId: session?.session?.activeOrganizationId ?? "" },
 });

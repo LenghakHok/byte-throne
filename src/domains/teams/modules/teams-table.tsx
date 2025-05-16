@@ -2,7 +2,7 @@ import {
   HydrationBoundary,
   type HydrationBoundaryProps,
 } from "@/core/lib/query-client";
-import { useSuspenseListTeams } from "@/core/services/teams/hooks";
+import { useListTeams } from "@/core/services/teams/hooks";
 
 interface Props extends HydrationBoundaryProps {
   organizationId?: string;
@@ -11,16 +11,12 @@ interface Props extends HydrationBoundaryProps {
 export function TeamsTable({ organizationId, ...props }: Props) {
   return (
     <HydrationBoundary {...props}>
-      <TeamsTableContent />
+      <TeamsTableContent organizationId={organizationId} />
     </HydrationBoundary>
   );
 }
 
 function TeamsTableContent({ organizationId }: Pick<Props, "organizationId">) {
-  const { data } = useSuspenseListTeams(undefined, {
-    query: {
-      organizationId,
-    },
-  });
+  const { data } = useListTeams({ query: { organizationId } });
   return <pre>{JSON.stringify(data, null, 2)}</pre>;
 }
