@@ -1,3 +1,4 @@
+import { cn } from "@/core/lib/cn";
 import {
   HydrationBoundary,
   type HydrationBoundaryProps,
@@ -17,13 +18,17 @@ import {
   TeamsActionsTrigger,
 } from "@/domains/teams/composites/teams-actions";
 import { TeamsGroupsTable } from "@/domains/teams/composites/teams-groups-table";
-import { useTeamsGroupsData } from "@/domains/teams/hooks/use-teams-groups-data";
+import {
+  useTeamsGroupsData,
+  type UseTeamsGroupsDataReturn,
+} from "@/domains/teams/hooks/use-teams-groups-data";
 import {
   ChevronRightIcon,
   Edit3Icon,
   EyeIcon,
   UserPlusIcon,
 } from "lucide-react";
+import type { ComponentPropsWithRef } from "react";
 
 interface Props extends HydrationBoundaryProps {
   organizationId?: string;
@@ -48,14 +53,14 @@ function TeamsGroup({ organizationId }: Pick<Props, "organizationId">) {
 
   return data?.teams.map((team) => (
     <Card
-      className="w-full rounded-md py-2"
+      className="w-full rounded-md p-0"
       key={team.id}
     >
       <Collapsible
         className="w-full"
         defaultOpen={true}
       >
-        <CardHeader className="grid w-full grid-cols-3 grid-rows-1 items-center px-2 text-start">
+        <CardHeader className="flex w-full items-center justify-between p-2 px-2 text-start">
           <CollapsibleTrigger
             asChild={true}
             className="w-fit"
@@ -70,53 +75,73 @@ function TeamsGroup({ organizationId }: Pick<Props, "organizationId">) {
             </Button>
           </CollapsibleTrigger>
 
-          <Separator />
-
-          <div className="flex h-full flex-row items-center justify-end gap-2">
-            <Button
-              size="sm"
-              variant="ghost"
-            >
-              <UserPlusIcon className="text-muted-foreground" />
-              <span className="sr-only">Add Members</span>
-            </Button>
-
-            <Button
-              size="sm"
-              variant="ghost"
-            >
-              <Edit3Icon className="text-muted-foreground" />
-              <span className="sr-only">Edit Teams</span>
-            </Button>
-
-            <Button
-              size="sm"
-              variant="ghost"
-            >
-              <EyeIcon className="text-muted-foreground" />
-              <span className="sr-only">View Details</span>
-            </Button>
-
-            <Separator
-              className="data-[orientation=vertical]:h-4"
-              orientation="vertical"
-            />
-
-            <TeamsActionsDropdownMenu>
-              <TeamsActionsTrigger />
-              <TeamsActionsContent
-                organizationId={team.organizationId}
-                teamId={team.id}
-              />
-            </TeamsActionsDropdownMenu>
-          </div>
+          <TeamsGroupsHeader team={team} />
         </CardHeader>
         <CollapsibleContent>
-          <CardContent className="p-4">
-            <TeamsGroupsTable data={data} />
+          <CardContent className="p-0">
+            <TeamsGroupsTable
+              className="p-4 pt-0"
+              data={data?.members}
+            />
           </CardContent>
         </CollapsibleContent>
       </Collapsible>
     </Card>
   ));
+}
+
+interface TeamsGroupsHeaderProps extends ComponentPropsWithRef<"div"> {
+  team: UseTeamsGroupsDataReturn["teams"][number];
+}
+function TeamsGroupsHeader({
+  className,
+  team,
+  ...props
+}: TeamsGroupsHeaderProps) {
+  return (
+    <div
+      className={cn(
+        "flex h-full flex-row items-center justify-end gap-2",
+        className,
+      )}
+      {...props}
+    >
+      <Button
+        size="sm"
+        variant="ghost"
+      >
+        <UserPlusIcon className="text-muted-foreground" />
+        <span className="sr-only">Add Members</span>
+      </Button>
+
+      <Button
+        size="sm"
+        variant="ghost"
+      >
+        <Edit3Icon className="text-muted-foreground" />
+        <span className="sr-only">Edit Teams</span>
+      </Button>
+
+      <Button
+        size="sm"
+        variant="ghost"
+      >
+        <EyeIcon className="text-muted-foreground" />
+        <span className="sr-only">View Details</span>
+      </Button>
+
+      <Separator
+        className="data-[orientation=vertical]:h-4"
+        orientation="vertical"
+      />
+
+      <TeamsActionsDropdownMenu>
+        <TeamsActionsTrigger />
+        <TeamsActionsContent
+          organizationId={team.organizationId}
+          teamId={team.id}
+        />
+      </TeamsActionsDropdownMenu>
+    </div>
+  );
 }

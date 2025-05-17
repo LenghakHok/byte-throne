@@ -1,3 +1,4 @@
+import { Badge } from "@/core/ui/badge";
 import { Button } from "@/core/ui/button";
 import { Checkbox } from "@/core/ui/checkbox";
 import { ProfileDisplay } from "@/domains/dashboard/modules/profile";
@@ -11,50 +12,58 @@ export const teamsTableColumns: ColumnDef<TeamsGroupDataMember>[] = [
     id: "selection",
     header: ({ table }) => (
       <Checkbox
+        aria-label="Select all"
         checked={
-          table.getToggleAllRowsSelectedHandler()
-            ? "indeterminate"
-            : table.getIsAllRowsSelected()
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onChange={table.getToggleAllRowsSelectedHandler()} //or getToggleAllPageRowsSelectedHandler
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
       />
     ),
     cell: ({ row }) => (
       <Checkbox
+        aria-label="Select row"
         checked={row.getIsSelected()}
-        disabled={!row.getCanSelect()}
-        onChange={row.getToggleSelectedHandler()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
       />
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    header: "User",
-    cell: ({ row }) => {
-      return <ProfileDisplay user={row.original.user} />;
-    },
+    header: "Profile",
+    cell: ({ row }) => <ProfileDisplay user={row.original.user} />,
   },
   {
-    header: "Identifier",
-    accessorKey: "id",
+    header: "Teams",
+    cell: ({ row }) => <Badge>{row.original.team?.name}</Badge>,
   },
   {
     header: "Role",
     accessorKey: "role",
+    cell: ({ getValue }) => (
+      <Badge
+        className="capitalize"
+        variant="outline"
+      >
+        {getValue() as string}
+      </Badge>
+    ),
   },
   {
     header: "Created Date",
-    cell: ({ row }) => {
-      return format(row.original.createdAt, "dd - MMM - yyyy");
-    },
+    cell: ({ row }) => format(row.original.createdAt, "dd - MMM - yyyy"),
   },
   {
     id: "Actions",
-    cell: () => {
-      <Button variant="ghost">
+    cell: () => (
+      <Button
+        className="size-8"
+        size="icon"
+        variant="ghost"
+      >
         <MoreVerticalIcon />
-      </Button>;
-    },
+      </Button>
+    ),
   },
 ];

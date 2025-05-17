@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/core/ui/table";
 import { Muted } from "@/core/ui/typography";
-import type { UseTeamsGroupsDataReturn } from "@/domains/teams/hooks/use-teams-groups-data";
+import type { TeamsGroupDataMember } from "@/domains/teams/hooks/use-teams-groups-data";
 import {
   flexRender,
   getCoreRowModel,
@@ -21,14 +21,14 @@ import React from "react";
 import { teamsTableColumns } from "./teams-table-columns";
 
 interface Props extends ComponentPropsWithRef<"div"> {
-  data: UseTeamsGroupsDataReturn;
+  data: TeamsGroupDataMember[];
 }
 
-export function TeamsGroupsTable({ className, ...props }: Props) {
+export function TeamsGroupsTable({ className, data, ...props }: Props) {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data: [],
+    data,
     columns: teamsTableColumns,
     getCoreRowModel: getCoreRowModel(),
     onRowSelectionChange: setRowSelection,
@@ -39,7 +39,7 @@ export function TeamsGroupsTable({ className, ...props }: Props) {
 
   return (
     <div
-      className={cn("rounded-md border", className)}
+      className={cn("rounded-none", className)}
       {...props}
     >
       <Table>
