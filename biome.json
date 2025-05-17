@@ -120,6 +120,7 @@
       "style": {
         "all": true,
         "noDefaultExport": "off",
+        "noNamespace": "off",
         "noNamespaceImport": "off",
         "noParameterAssign": "warn",
         "noParameterProperties": "off",

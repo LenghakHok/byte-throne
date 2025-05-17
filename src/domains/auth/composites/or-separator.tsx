@@ -1,6 +1,6 @@
-import { Separator } from "@/components/ui/separator";
-import { Muted } from "@/components/ui/typography";
-import { cn } from "@/lib/cn";
+import { cn } from "@/core/lib/cn";
+import { Separator } from "@/core/ui/separator";
+import { Muted } from "@/core/ui/typography";
 import type { ComponentPropsWithRef } from "react";
 
 export function OrSeparator({

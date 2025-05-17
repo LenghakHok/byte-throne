@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth-server";
+import { auth } from "@/core/lib/auth-server";
 import { Hono } from "hono";
 
 const app = new Hono();

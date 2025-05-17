@@ -4,6 +4,7 @@ export {
   members,
   organizations,
   sessions,
+  teams,
   users,
   verifications,
 } from "./auth";

@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/cn";
+import { cn } from "@/core/lib/cn";
+import { Button } from "@/core/ui/button";
+import { Input } from "@/core/ui/input";
 import { EyeClosedIcon, EyeIcon, KeyIcon } from "lucide-react";
 import {
   useCallback,

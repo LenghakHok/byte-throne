@@ -1,7 +1,9 @@
-import type { authClient } from "@/lib/auth-client";
-import { createValidate } from "typia";
+import { object, picklist, type InferInput } from "valibot";
 
-export interface OAuthRequest
-  extends Pick<Parameters<typeof authClient.signIn.social>[0], "provider"> {}
+// Define the Arktype schema for OAuthRequest
+export const oAuthRequestSchema = object({
+  provider: picklist(["google", "github", "discord"]),
+});
 
-export const validateOAuthRequest = createValidate<OAuthRequest>();
+// Create a type alias from the Arktype definition
+export type OAuthRequest = InferInput<typeof oAuthRequestSchema>;
