@@ -1,12 +1,12 @@
 import { Button } from "@/core/ui/button";
 import { Checkbox } from "@/core/ui/checkbox";
 import { ProfileDisplay } from "@/domains/dashboard/modules/profile";
+import type { TeamsGroupDataMember } from "@/domains/teams/hooks/use-teams-groups-data";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { MoreVerticalIcon } from "lucide-react";
-import type { TeamsGroupDataMember } from "../hooks/use-teams-groups-data";
 
-export const columns: ColumnDef<TeamsGroupDataMember>[] = [
+export const teamsTableColumns: ColumnDef<TeamsGroupDataMember>[] = [
   {
     id: "selection",
     header: ({ table }) => (
@@ -50,7 +50,7 @@ export const columns: ColumnDef<TeamsGroupDataMember>[] = [
     },
   },
   {
-    header: "",
+    id: "Actions",
     cell: () => {
       <Button variant="ghost">
         <MoreVerticalIcon />

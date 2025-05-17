@@ -4,7 +4,7 @@ import {
 } from "@/core/lib/query-client";
 import { useGetFullOrganization } from "@/core/services/orgs/hooks";
 import { Button } from "@/core/ui/button";
-import { Card, CardHeader, CardTitle } from "@/core/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/core/ui/card";
 import {
   Collapsible,
   CollapsibleContent,
@@ -16,13 +16,14 @@ import {
   TeamsActionsDropdownMenu,
   TeamsActionsTrigger,
 } from "@/domains/teams/composites/teams-actions";
+import { TeamsGroupsTable } from "@/domains/teams/composites/teams-groups-table";
+import { useTeamsGroupsData } from "@/domains/teams/hooks/use-teams-groups-data";
 import {
   ChevronRightIcon,
   Edit3Icon,
   EyeIcon,
   UserPlusIcon,
 } from "lucide-react";
-import { useTeamsGroupsData } from "../hooks/use-teams-groups-data";
 
 interface Props extends HydrationBoundaryProps {
   organizationId?: string;
@@ -31,12 +32,12 @@ interface Props extends HydrationBoundaryProps {
 export function TeamsGroups({ organizationId, ...props }: Props) {
   return (
     <HydrationBoundary {...props}>
-      <TeamsGroupHeader organizationId={organizationId} />
+      <TeamsGroup organizationId={organizationId} />
     </HydrationBoundary>
   );
 }
 
-function TeamsGroupHeader({ organizationId }: Pick<Props, "organizationId">) {
+function TeamsGroup({ organizationId }: Pick<Props, "organizationId">) {
   const { data: response } = useGetFullOrganization({
     query: {
       organizationId: organizationId,
@@ -110,7 +111,11 @@ function TeamsGroupHeader({ organizationId }: Pick<Props, "organizationId">) {
             </TeamsActionsDropdownMenu>
           </div>
         </CardHeader>
-        <CollapsibleContent>{/*  */}</CollapsibleContent>
+        <CollapsibleContent>
+          <CardContent className="p-4">
+            <TeamsGroupsTable data={data} />
+          </CardContent>
+        </CollapsibleContent>
       </Collapsible>
     </Card>
   ));
