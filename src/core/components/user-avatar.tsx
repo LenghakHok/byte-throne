@@ -2,8 +2,9 @@ import type { authClient } from "@/core/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
 import type { ComponentPropsWithRef } from "react";
 
-type Props = ComponentPropsWithRef<typeof Avatar> &
-  typeof authClient.$Infer.Session & {};
+interface Props extends ComponentPropsWithRef<typeof Avatar> {
+  user: Partial<typeof authClient.$Infer.Session.user>;
+}
 
 export function UserAvatar({ user, ...props }: Props) {
   return (
@@ -12,7 +13,7 @@ export function UserAvatar({ user, ...props }: Props) {
         alt="profile"
         src={user.image ?? ""}
       />
-      <AvatarFallback className="border">{user.name[0]}</AvatarFallback>
+      <AvatarFallback className="border">{user?.name?.[0]}</AvatarFallback>
     </Avatar>
   );
 }

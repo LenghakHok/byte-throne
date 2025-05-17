@@ -3,7 +3,7 @@ import type { QueryClient } from "@tanstack/react-query";
 
 import { queryKeys } from "./keys";
 
-export function loadFullOrganization(
+export function preloadFullOrganization(
   queryclient: QueryClient,
   ...args: Parameters<typeof auth.api.getFullOrganization>
 ) {

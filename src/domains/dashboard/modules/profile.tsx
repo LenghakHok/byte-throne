@@ -50,7 +50,6 @@ interface UserAvatarProps extends ComponentPropsWithRef<typeof UserAvatar> {}
 // Component: ProfileDisplay - Shows user avatar and info
 export function ProfileDisplay({
   className,
-  session,
   user,
   ...props
 }: ComponentPropsWithRef<"div"> & UserAvatarProps) {
@@ -61,7 +60,6 @@ export function ProfileDisplay({
     >
       <UserAvatar
         className="size-10"
-        session={session}
         user={user}
       />
 
@@ -208,7 +206,7 @@ const SupportSection = () => (
 );
 
 // Main Component: ProfileDropdown
-export function ProfileDropdown({ session, user, ...props }: UserAvatarProps) {
+export function ProfileDropdown({ user, ...props }: UserAvatarProps) {
   const handleSignOut = useCallback(() => {
     authClient.signOut().then((_res) => {
       location.replace("/auth/sign-in");
@@ -224,7 +222,6 @@ export function ProfileDropdown({ session, user, ...props }: UserAvatarProps) {
         )}
       >
         <UserAvatar
-          session={session}
           user={user}
           {...props}
         />
@@ -239,7 +236,6 @@ export function ProfileDropdown({ session, user, ...props }: UserAvatarProps) {
           <div className="justify-end-safe flex flex-col items-center gap-4 p-2">
             <ProfileDisplay
               className="w-full"
-              session={session}
               user={user}
             />
 

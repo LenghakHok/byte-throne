@@ -1,15 +1,15 @@
 ---
 import { $queryClient } from "@/core/lib/query-client";
-import { loadFullOrganization } from "@/core/services/orgs/loaders";
-import { TeamsTable } from "@/domains/teams/modules/teams-table";
+import { preloadFullOrganization } from "@/core/services/orgs/loaders";
+import { TeamsDeleteAlertDialog } from "@/domains/teams/composites/teams-delete-alert";
+import { TeamsGroups } from "@/domains/teams/modules/teams-groups";
 import { dehydrate } from "@tanstack/react-query";
-import { TeamsDeleteAlertDialog } from "../composites/teams-delete-alert";
 
 const { session } = Astro.locals;
 
 const queryclient = $queryClient.get();
 
-loadFullOrganization(queryclient, {
+preloadFullOrganization(queryclient, {
   headers: Astro.request.headers,
   query: { organizationId: session?.session?.activeOrganizationId ?? "" },
 });
@@ -18,7 +18,7 @@ const hydratedState = dehydrate(queryclient);
 ---
 
 <section class="bg-secondary flex flex-col gap-1 rounded-md border p-1">
-  <TeamsTable
+  <TeamsGroups
     state={hydratedState}
     organizationId={session?.session.activeOrganizationId ?? ""}
     client:load

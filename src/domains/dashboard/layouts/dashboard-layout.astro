@@ -43,11 +43,7 @@ const pathname = Astro.originPathname;
             client:load
           />
 
-          <ProfileDropdown
-            session={session?.session}
-            user={session?.user}
-            client:load
-          />
+          <ProfileDropdown user={session?.user} client:load />
         </div>
       </NavBar>
 

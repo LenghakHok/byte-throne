@@ -22,26 +22,30 @@ import {
   EyeIcon,
   UserPlusIcon,
 } from "lucide-react";
+import { useTeamsGroupsData } from "../hooks/use-teams-groups-data";
 
 interface Props extends HydrationBoundaryProps {
   organizationId?: string;
 }
 
-export function TeamsTable({ organizationId, ...props }: Props) {
+export function TeamsGroups({ organizationId, ...props }: Props) {
   return (
     <HydrationBoundary {...props}>
-      <TeamsTableContent organizationId={organizationId} />
+      <TeamsGroupHeader organizationId={organizationId} />
     </HydrationBoundary>
   );
 }
 
-function TeamsTableContent({ organizationId }: Pick<Props, "organizationId">) {
+function TeamsGroupHeader({ organizationId }: Pick<Props, "organizationId">) {
   const { data: response } = useGetFullOrganization({
     query: {
       organizationId: organizationId,
     },
   });
-  return response?.data?.teams.map((team) => (
+
+  const data = useTeamsGroupsData(response?.data);
+
+  return data?.teams.map((team) => (
     <Card
       className="w-full rounded-md py-2"
       key={team.id}

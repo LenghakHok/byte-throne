@@ -1,3 +1,4 @@
+import type { authClient } from "@/core/lib/auth-client";
 import {
   maxLength,
   minLength,
@@ -27,3 +28,15 @@ export const getFullOrganizationRequest = object({
 });
 export interface GetFullOrganizationRequest
   extends InferInput<typeof getFullOrganizationRequest> {}
+
+export interface GetFullOrganizationResponse {
+  name: string;
+  slug: string;
+  logo?: string | null | undefined;
+  createdAt: Date;
+  metadata?: any;
+  id: string;
+  invitations: (typeof authClient.$Infer.Invitation)[];
+  members: (typeof authClient.$Infer.Member)[];
+  teams: (typeof authClient.$Infer.Team)[];
+}
