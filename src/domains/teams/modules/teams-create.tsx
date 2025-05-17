@@ -5,7 +5,6 @@ import {
   createTeamRequest,
   type CreateTeamRequest,
 } from "@/core/services/teams/pipes";
-import { Alert, AlertDescription } from "@/core/ui/alert";
 import { Avatar, AvatarFallback } from "@/core/ui/avatar";
 import { Button } from "@/core/ui/button";
 import {
@@ -20,6 +19,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,9 +28,9 @@ import {
 import { Input } from "@/core/ui/input";
 import { Separator } from "@/core/ui/separator";
 import { Small } from "@/core/ui/typography";
-import { If } from "@/core/utils/if";
+import { FormAlert } from "@/domains/dashboard/composites/form-alert";
 import { valibotResolver } from "@hookform/resolvers/valibot";
-import { AlertCircleIcon, LoaderCircleIcon, PlusIcon } from "lucide-react";
+import { LoaderCircleIcon, PlusIcon } from "lucide-react";
 import { useEffect, useRef, type ComponentPropsWithRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -93,18 +93,7 @@ export function TeamsCreateForm({
         onSubmit={form.handleSubmit((v: CreateTeamRequest) => createTeam(v))}
         {...props}
       >
-        <If isTrue={Boolean(form.formState.errors.root?.message)}>
-          <Alert
-            className="rounded-l-none border-0 border-l-2 border-l-current bg-current/5"
-            variant="destructive"
-          >
-            <AlertCircleIcon />
-            <AlertDescription>
-              {form.formState.errors.root?.message}
-            </AlertDescription>
-          </Alert>
-        </If>
-
+        <FormAlert message={form.formState.errors.root?.message} />
         <FormItem className="grid grid-cols-4 grid-rows-1">
           <FormLabel className="col-span-1 whitespace-nowrap">
             Organization
@@ -121,24 +110,26 @@ export function TeamsCreateForm({
           </div>
         </FormItem>
 
+        <Separator className="border border-dashed bg-transparent" />
+
         <FormField
           name="name"
           render={({ field }) => (
-            <FormItem className="grid grid-cols-4">
+            <FormItem>
               <FormLabel className="whitespace-nowrap">Team Name</FormLabel>
               <FormControl>
                 <Input
-                  className="col-span-3"
                   placeholder="e.g. Bishop"
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="col-start-2 col-end-4" />
+              <FormDescription>
+                This is the display team name. (Duplicatable)
+              </FormDescription>
+              <FormMessage />
             </FormItem>
           )}
         />
-
-        <Separator className="border border-dashed bg-transparent" />
 
         <Button
           className={cn(isPending ? "" : "gap-0")}

@@ -2,13 +2,14 @@ import {
   maxLength,
   minLength,
   object,
+  optional,
   pipe,
   string,
   uuid,
   type InferInput,
 } from "valibot";
 
-export const createOrgRequestSchema = object({
+export const createOrgRequest = object({
   name: pipe(
     string(),
     minLength(2, "Name is too short"),
@@ -18,4 +19,11 @@ export const createOrgRequestSchema = object({
   userId: pipe(string(), uuid()),
 });
 
-export type CreateOrgRequest = InferInput<typeof createOrgRequestSchema>;
+export type CreateOrgRequest = InferInput<typeof createOrgRequest>;
+
+export const getFullOrganizationRequest = object({
+  organizationId: optional(string()),
+  organizationSlug: optional(string()),
+});
+export interface GetFullOrganizationRequest
+  extends InferInput<typeof getFullOrganizationRequest> {}

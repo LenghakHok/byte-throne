@@ -2,10 +2,9 @@ import type { authClient } from "@/core/lib/auth-client";
 import { cn } from "@/core/lib/cn";
 import { useCreateOrg } from "@/core/services/orgs/hooks";
 import {
-  createOrgRequestSchema,
+  createOrgRequest,
   type CreateOrgRequest,
 } from "@/core/services/orgs/pipes";
-import { Alert, AlertDescription } from "@/core/ui/alert";
 import { Button } from "@/core/ui/button";
 import {
   Dialog,
@@ -25,11 +24,10 @@ import {
 } from "@/core/ui/form";
 import { Input } from "@/core/ui/input";
 import { Separator } from "@/core/ui/separator";
-import { If } from "@/core/utils/if";
+import { FormAlert } from "@/domains/dashboard/composites/form-alert";
 import { createOrgDialog$ } from "@/domains/org/stores/org-store";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { observer, useObservable } from "@legendapp/state/react";
-import { AlertCircleIcon } from "lucide-react";
 import { useCallback, useEffect, type ComponentPropsWithRef } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
@@ -92,7 +90,7 @@ export function CreateOrganizationForm({
 }: CreateOrganizationFormProps) {
   const form = useForm({
     resolver: valibotResolver<CreateOrgRequest, null, CreateOrgRequest>(
-      createOrgRequestSchema,
+      createOrgRequest,
     ),
     defaultValues: {
       name: "",
@@ -122,17 +120,7 @@ export function CreateOrganizationForm({
         onSubmit={form.handleSubmit((v) => createOrg(v))}
         {...props}
       >
-        <If isTrue={Boolean(form.formState.errors.root?.message)}>
-          <Alert
-            className="rounded-l-none border-0 border-l-2 border-l-current bg-current/5"
-            variant="destructive"
-          >
-            <AlertCircleIcon />
-            <AlertDescription>
-              {form.formState.errors.root?.message}
-            </AlertDescription>
-          </Alert>
-        </If>
+        <FormAlert message={form.formState.errors.root?.message} />
 
         {/* Name */}
         <FormField

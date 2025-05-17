@@ -8,10 +8,17 @@ import {
 } from "valibot";
 
 export const createTeamRequest = object({
-  name: pipe(string(), minLength(2, "Name is too short")),
+  name: pipe(string(), minLength(2, "Team name is too short")),
 });
 export interface CreateTeamRequest
   extends InferInput<typeof createTeamRequest> {}
+
+export const removeTeamRequest = object({
+  teamId: string(),
+  organizationId: optional(string()),
+});
+export interface RemoveTeamRequest
+  extends InferInput<typeof removeTeamRequest> {}
 
 export const listTeamsRequest = object({
   organizationId: optional(string()),

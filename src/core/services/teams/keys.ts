@@ -7,5 +7,6 @@ export const queryKeys = {
 };
 
 export const mutationKeys = {
-  create: () => [...queryKeys.all, "create"] as const,
+  create: (arg: unknown) => [...queryKeys.all, "create", arg] as const,
+  delete: (arg: unknown) => [...queryKeys.all, "create", arg] as const,
 };

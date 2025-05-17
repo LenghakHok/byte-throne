@@ -1,10 +1,10 @@
 import { authClient } from "@/core/lib/auth-client";
 import { $queryClient } from "@/core/lib/query-client";
 import { useStore } from "@nanostores/react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { toast } from "sonner";
-import { mutationKeys } from "./keys";
+import { mutationKeys, queryKeys } from "./keys";
 import type { CreateOrgRequest } from "./pipes";
 
 export function useCreateOrg<
@@ -50,6 +50,23 @@ export function useSetActiveOrg() {
         return await authClient.organization.setActive({
           organizationId: v?.organizationId,
         });
+      },
+    },
+    queryClient,
+  );
+}
+
+export function useGetFullOrganization(
+  ...args: Parameters<typeof authClient.organization.getFullOrganization>
+) {
+  const queryClient = useStore($queryClient);
+  return useQuery(
+    {
+      queryKey: queryKeys.fullOrganization({
+        ...args?.[0]?.query,
+      }),
+      queryFn: async () => {
+        return await authClient.organization.getFullOrganization(...args);
       },
     },
     queryClient,
