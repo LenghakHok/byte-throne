@@ -5,10 +5,12 @@ import { useStore } from "@nanostores/react";
 import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { toast } from "sonner";
+import { getDetailTeam } from "./api";
 import { mutationKeys, queryKeys, queryKeys as teamQueryKeys } from "./keys";
 import type {
   CreateTeamRequest,
   RemoveTeamRequest,
+  TeamIdParamsRequest,
   UpdateTeamRequest,
 } from "./pipes";
 
@@ -169,14 +171,24 @@ export function useSuspenseListTeams(
   );
 }
 
-export function useDetailTeam() {
+export function useDetailTeam(arg: TeamIdParamsRequest) {
   const queryClient = useStore($queryClient);
   return useQuery(
     {
-      queryKey: queryKeys.detail(undefined),
-      queryFn: async () => {
-        return await authClient.organization.listTeams({ query: {} });
-      },
+      queryKey: queryKeys.detail(arg),
+      queryFn: async () => getDetailTeam(arg),
+      enabled: Boolean(arg.id),
+    },
+    queryClient,
+  );
+}
+
+export function useSuspenseDetailTeam(arg: TeamIdParamsRequest) {
+  const queryClient = useStore($queryClient);
+  return useSuspenseQuery(
+    {
+      queryKey: queryKeys.detail(arg),
+      queryFn: async () => getDetailTeam(arg),
     },
     queryClient,
   );

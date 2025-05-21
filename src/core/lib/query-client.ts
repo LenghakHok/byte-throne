@@ -12,6 +12,7 @@ export const $queryClient = atom(
   new QueryClient({
     defaultOptions: {
       queries: {
+        retry: false,
         refetchOnMount: false,
         refetchOnReconnect: true,
         refetchOnWindowFocus: false,

@@ -5,6 +5,7 @@ import {
   DashboardHeaderTitle,
 } from "@/domains/dashboard/components/header";
 import { TeamsCreateDialog } from "@/domains/teams/modules/teams-create";
+import { TeamsEditDialog } from "@/domains/teams/modules/teams-edit";
 ---
 
 <section
@@ -18,4 +19,5 @@ import { TeamsCreateDialog } from "@/domains/teams/modules/teams-create";
   </DashboardHeader>
 
   <TeamsCreateDialog client:load />
+  <TeamsEditDialog client:load />
 </section>

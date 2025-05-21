@@ -41,6 +41,7 @@ import {
 } from "@tanstack/react-table";
 import { ChevronRightIcon, Edit3Icon, EyeIcon, PlusIcon } from "lucide-react";
 import { useState, type ComponentPropsWithRef, type ReactNode } from "react";
+import { teamsUpdateDialog$ } from "../stores/teams-store";
 
 interface Props extends HydrationBoundaryProps {
   organizationId?: string;
@@ -136,6 +137,14 @@ function TeamsGroupsHeader({
       {...props}
     >
       <Button
+        onClick={() =>
+          teamsUpdateDialog$.set({
+            isOpen: true,
+            meta: {
+              teamId: team.id,
+            },
+          })
+        }
         size="icon"
         variant="ghost"
       >

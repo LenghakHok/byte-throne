@@ -1,3 +1,4 @@
+import { createValidateEquals } from "typia";
 import {
   minLength,
   object,
@@ -16,7 +17,10 @@ export interface CreateTeamRequest
 export const updateTeamRequest = object({
   teamId: string(),
   data: object({
-    name: string(),
+    name: pipe(
+      string("Name is required"),
+      minLength(2, "Team name is too short"),
+    ),
   }),
 });
 export interface UpdateTeamRequest
@@ -33,3 +37,8 @@ export const listTeamsRequest = object({
   organizationId: optional(string()),
 });
 export interface ListTeamsRequest extends InferInput<typeof listTeamsRequest> {}
+
+export interface TeamIdParamsRequest {
+  id: string;
+}
+export const validateTeamIdParams = createValidateEquals<TeamIdParamsRequest>();

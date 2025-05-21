@@ -8,6 +8,13 @@ interface TeamsDeleteDialogVariables {
   };
 }
 
+interface TeamsUpdateDialogVariables {
+  isOpen: boolean;
+  meta: {
+    teamId: string | undefined;
+  };
+}
+
 export const teamsDeleteDialog$ = observable<TeamsDeleteDialogVariables>({
   isOpen: false,
   meta: {
@@ -16,7 +23,7 @@ export const teamsDeleteDialog$ = observable<TeamsDeleteDialogVariables>({
   },
 });
 
-export const teamsUpdateDialog$ = observable({
+export const teamsUpdateDialog$ = observable<TeamsUpdateDialogVariables>({
   isOpen: false,
   meta: {
     teamId: undefined,
