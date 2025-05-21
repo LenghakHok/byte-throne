@@ -1,5 +1,5 @@
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Button, buttonVariants } from "@/core/ui/button";
+import { Checkbox } from "@/core/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -7,25 +7,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/core/ui/form";
 import { InputIcon } from "@/domains/auth/composites/input-icon";
 import { InputPassword } from "@/domains/auth/composites/input-password";
 
+import { authClient } from "@/core/lib/auth-client";
+import { cn } from "@/core/lib/cn";
 import {
-  signInRequestErrors,
-  validateSignInRequest,
+  signInRequestSchema,
   type SignInRequest,
 } from "@/domains/auth/pipes/sign-in.pipe";
-import { authClient } from "@/lib/auth-client";
-import { cn } from "@/lib/cn";
-import { typiaResolver } from "@/lib/typia-resolver";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { AtSignIcon } from "lucide-react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 export function SignInForm() {
-  const form = useForm<SignInRequest>({
-    resolver: typiaResolver(validateSignInRequest, signInRequestErrors),
+  const form = useForm({
+    resolver: valibotResolver<SignInRequest, unknown, SignInRequest>(
+      signInRequestSchema,
+    ),
     defaultValues: {
       email: "",
       password: "",

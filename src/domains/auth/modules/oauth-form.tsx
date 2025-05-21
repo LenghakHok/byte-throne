@@ -1,20 +1,19 @@
-import { DiscordIcon } from "@/components/icons/discord";
-import { GithubIcon } from "@/components/icons/github";
-import { GoogleIcon } from "@/components/icons/google";
-import { Button } from "@/components/ui/button";
-import { Form as FormProvider } from "@/components/ui/form";
-import { authClient } from "@/lib/auth-client";
-import { cn } from "@/lib/cn";
-import { typiaResolver } from "@/lib/typia-resolver";
-import { For } from "@/utils/for";
-import { useCallback, type ComponentPropsWithRef } from "react";
-import { useForm } from "react-hook-form";
-
+import { DiscordIcon } from "@/core/icons/discord";
+import { GithubIcon } from "@/core/icons/github";
+import { GoogleIcon } from "@/core/icons/google";
+import { authClient } from "@/core/lib/auth-client";
+import { cn } from "@/core/lib/cn";
+import { Button } from "@/core/ui/button";
+import { Form as FormProvider } from "@/core/ui/form";
+import { For } from "@/core/utils/for";
+import { If } from "@/core/utils/if";
 import {
-  validateOAuthRequest,
+  oAuthRequestSchema,
   type OAuthRequest,
 } from "@/domains/auth/pipes/oauth.pipe";
-import { If } from "@/utils/if";
+import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useCallback, type ComponentPropsWithRef } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props extends ComponentPropsWithRef<"form"> {
   callbackURL?: string;
@@ -49,7 +48,9 @@ export function OAuthForm({
   ...props
 }: Props) {
   const form = useForm({
-    resolver: typiaResolver<OAuthRequest>(validateOAuthRequest),
+    resolver: valibotResolver<OAuthRequest, unknown, OAuthRequest>(
+      oAuthRequestSchema,
+    ),
     defaultValues: {
       provider: "google" as const,
     },

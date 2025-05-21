@@ -1,15 +1,15 @@
 ---
-import RootLayout from "@/components/layouts/root-layout.astro";
-import { cn } from "@/lib/cn";
+import { ParticlesLayout } from "@/core/layouts/particles-layout";
+import RootLayout from "@/core/layouts/root-layout.astro";
+import { cn } from "@/core/lib/cn";
 import type { HTMLAttributes } from "astro/types";
-import { AuthLayout as Layout } from "./auth-layout";
 interface Props extends HTMLAttributes<"main"> {}
 
 const { class: className, ...props } = Astro.props;
 ---
 
 <RootLayout>
-  <Layout client:load>
+  <ParticlesLayout client:load>
     <main
       class={cn(
         "relative flex size-full flex-col items-center justify-center overflow-hidden rounded-sm border bg-background",
@@ -19,5 +19,5 @@ const { class: className, ...props } = Astro.props;
     >
       <slot />
     </main>
-  </Layout>
+  </ParticlesLayout>
 </RootLayout>

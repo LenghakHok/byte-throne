@@ -1,0 +1,23 @@
+---
+import {
+  DashboardHeader,
+  DashboardHeaderDescription,
+  DashboardHeaderTitle,
+} from "@/domains/dashboard/components/header";
+import { TeamsCreateDialog } from "@/domains/teams/modules/teams-create";
+import { TeamsEditDialog } from "@/domains/teams/modules/teams-edit";
+---
+
+<section
+  class="min-h-25 flex flex-row flex-wrap items-end justify-between gap-6"
+>
+  <DashboardHeader>
+    <DashboardHeaderTitle>Teams Management</DashboardHeaderTitle>
+    <DashboardHeaderDescription>
+      Manage your teams and members in your organization
+    </DashboardHeaderDescription>
+  </DashboardHeader>
+
+  <TeamsCreateDialog client:load />
+  <TeamsEditDialog client:load />
+</section>

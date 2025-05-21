@@ -1,28 +1,28 @@
 ---
-import { Logo } from "@/components/core/logo";
-import { buttonVariants } from "@/components/ui/button";
+import { Logo } from "@/core/components/logo";
+import { cn } from "@/core/lib/cn";
+import { buttonVariants } from "@/core/ui/button";
 import {
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Muted } from "@/components/ui/typography";
+} from "@/core/ui/card";
+import { Muted } from "@/core/ui/typography";
 import AuthCardContent from "@/domains/auth/components/auth-card-content.astro";
 import AuthCardFooter from "@/domains/auth/components/auth-card-footer.astro";
 import AuthCard from "@/domains/auth/components/auth-card.astro";
-import { AuthLayout } from "@/domains/auth/layouts/auth-layout";
+import AuthLayout from "@/domains/auth/layouts/auth-layout.astro";
 import { OAuthForm } from "@/domains/auth/modules/oauth-form";
-import { cn } from "@/lib/cn";
 import { PUBLIC_APP_NAME } from "astro:env/client";
 ---
 
-<AuthLayout client:load>
+<AuthLayout>
   <AuthCard>
     <AuthCardContent>
       <CardHeader className="flex flex-col items-center justify-center">
         <Logo />
-        <CardTitle className="font-bold text-2xl text-center">
+        <CardTitle className="text-center text-2xl font-bold">
           Create an Account
         </CardTitle>
         <CardDescription className="text-center">
