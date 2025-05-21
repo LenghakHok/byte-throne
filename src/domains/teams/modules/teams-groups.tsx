@@ -77,14 +77,14 @@ function TeamsGroup({ organizationId }: Pick<Props, "organizationId">) {
 
   return data?.teams.map((team) => (
     <Card
-      className="z-10 w-full rounded-md p-0"
+      className="z-10 w-full rounded-md bg-secondary p-1"
       key={team.id}
     >
       <Collapsible
         className="w-full"
         defaultOpen={true}
       >
-        <CardHeader className="flex w-full items-center justify-between border-b p-2 px-2 text-start [.border-b]:p-2">
+        <CardHeader className="flex w-full items-center justify-between rounded-md border bg-card p-1 px-2 text-start [.border-b]:py-1">
           <CollapsibleTrigger
             asChild={true}
             className="w-fit"
@@ -102,9 +102,8 @@ function TeamsGroup({ organizationId }: Pick<Props, "organizationId">) {
           <TeamsGroupsHeader team={team} />
         </CardHeader>
         <CollapsibleContent>
-          <CardContent className="p-0">
+          <CardContent className="rounded-md border bg-card p-0">
             <TeamsGroupsTable
-              className="p-0"
               data={data?.members}
               table={table}
             />
@@ -181,7 +180,7 @@ function TeamsGroupsFooter({
   return (
     <CardFooter
       className={cn(
-        "flex w-full flex-row items-center justify-between gap-4 border-t p-2 pt-2 [.border-t]:pt-2",
+        "flex w-full flex-row items-center justify-between gap-4 p-0",
         className,
       )}
       {...props}
@@ -248,7 +247,7 @@ function TeamGroupMeta({
         </Badge>
       )}
       <If isTrue={Boolean(label)}>
-        <Muted>{label}</Muted>
+        <Muted className="text-xs uppercase tracking-widest">{label}</Muted>
       </If>
     </span>
   );

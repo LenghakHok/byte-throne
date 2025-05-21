@@ -17,7 +17,7 @@ preloadFullOrganization(queryclient, {
 const hydratedState = dehydrate(queryclient);
 ---
 
-<section class="bg-secondary flex flex-col gap-1 rounded-md border p-1">
+<section class="flex flex-col gap-6">
   <TeamsGroups
     state={hydratedState}
     organizationId={session?.session.activeOrganizationId ?? ""}
