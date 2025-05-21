@@ -5,7 +5,7 @@ import { ProfileDisplay } from "@/domains/dashboard/modules/profile";
 import type { TeamsGroupDataMember } from "@/domains/teams/hooks/use-teams-groups-data";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { MoreVerticalIcon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
 
 export const teamsTableColumns: ColumnDef<TeamsGroupDataMember>[] = [
   {
@@ -57,13 +57,15 @@ export const teamsTableColumns: ColumnDef<TeamsGroupDataMember>[] = [
   {
     id: "Actions",
     cell: () => (
-      <Button
-        className="size-8"
-        size="icon"
-        variant="ghost"
-      >
-        <MoreVerticalIcon />
-      </Button>
+      <div className="flex items-center justify-end">
+        <Button
+          size="sm"
+          variant="outline"
+        >
+          <span>Actions</span>
+          <ChevronDownIcon />
+        </Button>
+      </div>
     ),
   },
 ];
