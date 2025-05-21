@@ -28,6 +28,7 @@ import {
   TeamsActionsTrigger,
 } from "@/domains/teams/composites/teams-actions";
 import { TeamsGroupsTable } from "@/domains/teams/composites/teams-groups-table";
+import { teamsTableColumns } from "@/domains/teams/composites/teams-table-columns";
 import {
   useTeamsGroupsData,
   type TeamsGroupDataMember,
@@ -40,7 +41,6 @@ import {
 } from "@tanstack/react-table";
 import { ChevronRightIcon, Edit3Icon, EyeIcon, PlusIcon } from "lucide-react";
 import { useState, type ComponentPropsWithRef, type ReactNode } from "react";
-import { teamsTableColumns } from "../composites/teams-table-columns";
 
 interface Props extends HydrationBoundaryProps {
   organizationId?: string;
@@ -77,7 +77,7 @@ function TeamsGroup({ organizationId }: Pick<Props, "organizationId">) {
 
   return data?.teams.map((team) => (
     <Card
-      className="z-10 w-full rounded-md bg-secondary p-1"
+      className="z-10 w-full rounded-lg bg-secondary p-1"
       key={team.id}
     >
       <Collapsible

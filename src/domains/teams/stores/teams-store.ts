@@ -15,3 +15,10 @@ export const teamsDeleteDialog$ = observable<TeamsDeleteDialogVariables>({
     teamId: undefined,
   },
 });
+
+export const teamsUpdateDialog$ = observable({
+  isOpen: false,
+  meta: {
+    teamId: undefined,
+  },
+});

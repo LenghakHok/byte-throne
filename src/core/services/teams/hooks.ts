@@ -5,8 +5,12 @@ import { useStore } from "@nanostores/react";
 import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { toast } from "sonner";
-import { mutationKeys, queryKeys as teamQueryKeys } from "./keys";
-import type { CreateTeamRequest, RemoveTeamRequest } from "./pipes";
+import { mutationKeys, queryKeys, queryKeys as teamQueryKeys } from "./keys";
+import type {
+  CreateTeamRequest,
+  RemoveTeamRequest,
+  UpdateTeamRequest,
+} from "./pipes";
 
 export function useCreateTeam<
   TFieldValues extends FieldValues = FieldValues,
@@ -91,6 +95,44 @@ export function useDeleteTeam<
   );
 }
 
+export function useUpdateTeam<
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = any,
+  TTransformedValues = TFieldValues,
+>(form?: UseFormReturn<TFieldValues, TContext, TTransformedValues>) {
+  const queryClient = useStore($queryClient);
+
+  return useMutation(
+    {
+      mutationKey: mutationKeys.update(form?.getValues()),
+      mutationFn: async (arg: UpdateTeamRequest) =>
+        await authClient.organization.updateTeam(arg, {
+          throw: true,
+          onError: (e) => {
+            form?.setError("root", {
+              message: e.error.message,
+            });
+          },
+        }),
+      onSuccess: (data) => {
+        toast.success(data?.name);
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries({
+          queryKey: teamQueryKeys.all,
+          exact: false,
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: orgsQueryKeys.all,
+          exact: false,
+        });
+      },
+    },
+    queryClient,
+  );
+}
+
 export function useListTeams(
   ...args: Parameters<typeof authClient.organization.listTeams>
 ) {
@@ -121,6 +163,19 @@ export function useSuspenseListTeams(
       }),
       queryFn: async () => {
         return await authClient.organization.listTeams(...args);
+      },
+    },
+    queryClient,
+  );
+}
+
+export function useDetailTeam() {
+  const queryClient = useStore($queryClient);
+  return useQuery(
+    {
+      queryKey: queryKeys.detail(undefined),
+      queryFn: async () => {
+        return await authClient.organization.listTeams({ query: {} });
       },
     },
     queryClient,

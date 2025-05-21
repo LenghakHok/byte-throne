@@ -13,6 +13,15 @@ export const createTeamRequest = object({
 export interface CreateTeamRequest
   extends InferInput<typeof createTeamRequest> {}
 
+export const updateTeamRequest = object({
+  teamId: string(),
+  data: object({
+    name: string(),
+  }),
+});
+export interface UpdateTeamRequest
+  extends InferInput<typeof updateTeamRequest> {}
+
 export const removeTeamRequest = object({
   teamId: string(),
   organizationId: optional(string()),

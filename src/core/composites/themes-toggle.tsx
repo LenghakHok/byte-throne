@@ -1,3 +1,4 @@
+import { cn } from "@/core/lib/cn";
 import { theme$ } from "@/core/stores/theme-store";
 import { Button } from "@/core/ui/button";
 import {
@@ -9,16 +10,16 @@ import {
 import { observer } from "@legendapp/state/react";
 import { MonitorIcon, MoonStarIcon, SunIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
-import { cn } from "../lib/cn";
 
 export const ThemesToggle = observer(
-  (props: ComponentPropsWithRef<typeof Button>) => {
+  ({ className, ...props }: ComponentPropsWithRef<typeof Button>) => {
     const theme = theme$.get();
 
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild={true}>
           <Button
+            className={cn("relative", className)}
             size="icon"
             variant="outline"
             {...props}
@@ -28,12 +29,14 @@ export const ThemesToggle = observer(
                 "dark:-rotate-90 rotate-0 scale-100 transition-all dark:scale-0",
                 theme === "system" ? "-rotate-90 scale-0" : "",
               )}
+              suppressHydrationWarning={true}
             />
             <MoonStarIcon
               className={cn(
                 "absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100",
                 theme === "system" ? "dark:-rotate-90 dark:scale-0" : "",
               )}
+              suppressHydrationWarning={true}
             />
 
             <MonitorIcon
@@ -41,6 +44,7 @@ export const ThemesToggle = observer(
                 "absolute rotate-90 scale-0 transition-all",
                 theme === "system" ? "rotate-0 scale-100" : "",
               )}
+              suppressHydrationWarning={true}
             />
 
             <span className="sr-only">Toggle theme</span>

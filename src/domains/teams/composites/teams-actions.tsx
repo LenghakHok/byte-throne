@@ -16,6 +16,7 @@ import {
   XIcon,
 } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
+import { toast } from "sonner";
 
 export function TeamsActionsDropdownMenu({
   children,
@@ -62,7 +63,13 @@ export function TeamsActionsContent({
       {...props}
     >
       {/* Copy ID */}
-      <DropdownMenuItem className="gap-3">
+      <DropdownMenuItem
+        className="gap-3"
+        onClick={async () => {
+          await navigator.clipboard.writeText(teamId);
+          toast.success("Team ID - copied successfully.");
+        }}
+      >
         <CopyIcon />
         <span>Copy ID</span>
       </DropdownMenuItem>
