@@ -12,31 +12,18 @@ import { Muted } from "@/core/ui/typography";
 import type { TeamsGroupDataMember } from "@/domains/teams/hooks/use-teams-groups-data";
 import {
   flexRender,
-  getCoreRowModel,
-  useReactTable,
+  type Table as UseReturnTable,
 } from "@tanstack/react-table";
 import { PlusIcon, UserPlusIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
-import React from "react";
 import { teamsTableColumns } from "./teams-table-columns";
 
 interface Props extends ComponentPropsWithRef<"div"> {
   data: TeamsGroupDataMember[];
+  table: UseReturnTable<TeamsGroupDataMember>;
 }
 
-export function TeamsGroupsTable({ className, data, ...props }: Props) {
-  const [rowSelection, setRowSelection] = React.useState({});
-
-  const table = useReactTable({
-    data,
-    columns: teamsTableColumns,
-    getCoreRowModel: getCoreRowModel(),
-    onRowSelectionChange: setRowSelection,
-    state: {
-      rowSelection,
-    },
-  });
-
+export function TeamsGroupsTable({ className, data, table, ...props }: Props) {
   return (
     <div
       className={cn("rounded-none", className)}

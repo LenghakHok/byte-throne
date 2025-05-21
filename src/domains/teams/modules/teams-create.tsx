@@ -115,18 +115,19 @@ export function TeamsCreateForm({
         <FormField
           name="name"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="grid grid-cols-4">
               <FormLabel className="whitespace-nowrap">Team Name</FormLabel>
               <FormControl>
                 <Input
+                  className="col-start-2 col-end-5"
                   placeholder="e.g. Bishop"
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
+              <FormDescription className="col-start-2 col-end-5">
                 This is the display team name. (Duplicatable)
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="col-span-full col-start-2 text-start" />
             </FormItem>
           )}
         />
