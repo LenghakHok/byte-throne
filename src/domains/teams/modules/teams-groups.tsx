@@ -78,9 +78,9 @@ function TeamsGroup({ organizationId }: Pick<Props, "organizationId">) {
           <TeamsGroupsHeader team={team} />
         </CardHeader>
         <CollapsibleContent>
-          <CardContent className="p-0">
+          <CardContent className="border-t p-0">
             <TeamsGroupsTable
-              className="p-4 pt-0"
+              className="p-0"
               data={data?.members}
             />
           </CardContent>

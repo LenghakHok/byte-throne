@@ -33,7 +33,7 @@ export function TeamsActionsTrigger(
       {...props}
     >
       <Button
-        className="size-8"
+        className="size-8 text-muted-foreground"
         size="icon"
         variant="ghost"
       >

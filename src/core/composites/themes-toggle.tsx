@@ -9,9 +9,12 @@ import {
 import { observer } from "@legendapp/state/react";
 import { MonitorIcon, MoonStarIcon, SunIcon } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
+import { cn } from "../lib/cn";
 
 export const ThemesToggle = observer(
   (props: ComponentPropsWithRef<typeof Button>) => {
+    const theme = theme$.get();
+
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild={true}>
@@ -20,8 +23,26 @@ export const ThemesToggle = observer(
             variant="outline"
             {...props}
           >
-            <SunIcon className="dark:-rotate-90 rotate-0 scale-100 transition-all dark:scale-0" />
-            <MoonStarIcon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <SunIcon
+              className={cn(
+                "dark:-rotate-90 rotate-0 scale-100 transition-all dark:scale-0",
+                theme === "system" ? "-rotate-90 scale-0" : "",
+              )}
+            />
+            <MoonStarIcon
+              className={cn(
+                "absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100",
+                theme === "system" ? "dark:-rotate-90 dark:scale-0" : "",
+              )}
+            />
+
+            <MonitorIcon
+              className={cn(
+                "absolute rotate-90 scale-0 transition-all",
+                theme === "system" ? "rotate-0 scale-100" : "",
+              )}
+            />
+
             <span className="sr-only">Toggle theme</span>
           </Button>
         </DropdownMenuTrigger>
